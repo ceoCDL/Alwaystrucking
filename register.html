@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account | Always Trucking & Loading LLC</title>
+    <meta name="description" content="Create your Always Trucking & Loading LLC training account">
+    
+    <!-- External Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Local Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Agent Lee Scripts -->
+    <script src="js/agent-faq.js"></script>
+    <script src="js/agent-lee.js"></script>
+    
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        
+        .auth-page {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        .auth-image {
+            flex: 1;
+            background-image: url('https://public.youware.com/users-website-assets/prod/87705be6-6621-4fdf-88c9-49587a2c3371/g806f4de77d275e840c1bfb5f124415fd1b8bdc897de5a7c28af9cc296e5bbf1af941885c5b6562ac94d131510dac6d294b0e48e9f2bd636936ceca29a19f90de_1280.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .auth-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 86, 179, 0.7);
+        }
+        
+        .auth-image-content {
+            position: relative;
+            color: white;
+            text-align: center;
+            max-width: 500px;
+            padding: 2rem;
+        }
+        
+        .auth-image-content h2 {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .auth-image-content p {
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+        }
+        
+        .feature-list {
+            text-align: left;
+            margin-top: 2rem;
+        }
+        
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            color: white;
+        }
+        
+        .feature-list i {
+            color: #ffc107;
+            margin-right: 1rem;
+            font-size: 1.25rem;
+        }
+        
+        .auth-form-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        
+        .auth-form-wrapper {
+            width: 100%;
+            max-width: 450px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 3rem;
+        }
+        
+        .auth-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .auth-logo img {
+            height: 40px;
+            margin-right: 1rem;
+        }
+        
+        .auth-logo h1 {
+            font-size: 1.5rem;
+            margin: 0;
+        }
+        
+        .auth-title {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .auth-title h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .auth-title p {
+            color: #6c757d;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+        }
+        
+        .form-check {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-check input {
+            margin-right: 0.75rem;
+            margin-top: 0.25rem;
+        }
+        
+        .form-check label {
+            font-size: 0.875rem;
+            line-height: 1.4;
+            margin-bottom: 0;
+        }
+        
+        .form-check a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .form-check a:hover {
+            text-decoration: underline;
+        }
+        
+        .btn-block {
+            width: 100%;
+            padding: 0.875rem;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        
+        .password-strength {
+            margin-top: 0.5rem;
+            font-size: 0.875rem;
+        }
+        
+        .strength-meter {
+            height: 4px;
+            background-color: #e9ecef;
+            border-radius: 2px;
+            margin: 0.5rem 0;
+            overflow: hidden;
+        }
+        
+        .strength-meter-fill {
+            height: 100%;
+            width: 0%;
+            transition: all 0.3s ease;
+        }
+        
+        .strength-weak {
+            background-color: #dc3545;
+            width: 33%;
+        }
+        
+        .strength-medium {
+            background-color: #ffc107;
+            width: 66%;
+        }
+        
+        .strength-strong {
+            background-color: #28a745;
+            width: 100%;
+        }
+        
+        .auth-footer {
+            text-align: center;
+            margin-top: 2rem;
+            color: #6c757d;
+        }
+        
+        .auth-footer a {
+            color: var(--primary-color);
+            font-weight: 500;
+            text-decoration: none;
+        }
+        
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Form validation */
+        .form-control.is-invalid {
+            border-color: var(--danger-color);
+        }
+        
+        .invalid-feedback {
+            color: var(--danger-color);
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+        
+        @media (max-width: 992px) {
+            .auth-page {
+                flex-direction: column;
+            }
+            
+            .auth-image {
+                min-height: 300px;
+            }
+            
+            .auth-form-wrapper {
+                padding: 2rem;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand">
+                <a href="index.html">
+                    <img src="nvcqdjvkw0.png" alt="Always Trucking Logo" class="logo-img">
+                </a>
+                <h1>Always Trucking &amp; Loading LLC</h1>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="courses.html" class="nav-link">Courses</a>
+                </li>
+                <li class="nav-item">
+                    <a href="faq.html" class="nav-link">FAQ</a>
+                </li>
+                <li class="nav-item">
+                    <a href="employment.html" class="nav-link">Careers</a>
+                </li>
+                <li class="nav-item">
+                    <a href="login.html" class="nav-link btn btn-outline">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a href="register.html" class="nav-link active btn btn-primary">Register</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="auth-page">
+        <!-- Auth Image -->
+        <div class="auth-image">
+            <div class="auth-image-content">
+                <h2>Start Your Training Journey</h2>
+                <p>Join thousands of trucking professionals who have advanced their careers through our comprehensive training programs.</p>
+                
+                <ul class="feature-list">
+                    <li><i class="fas fa-check-circle"></i> Self-Paced Learning</li>
+                    <li><i class="fas fa-check-circle"></i> Industry-Recognized Certificates</li>
+                    <li><i class="fas fa-check-circle"></i> Offline Access</li>
+                    <li><i class="fas fa-check-circle"></i> DSPS Compliance Ready</li>
+                </ul>
+                
+                <div style="margin-top: 2rem;">
+                    <a href="index.html" class="btn btn-secondary">Visit Homepage</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Auth Form -->
+        <div class="auth-form-container">
+            <div class="auth-form-wrapper">
+                <div class="auth-logo">
+                    <img src="nvcqdjvkw0.png" alt="Always Trucking Logo" style="height: 50px; width: auto;">
+                    <h1>Always Trucking & Loading LLC</h1>
+                </div>
+                
+                <div class="auth-title">
+                    <h2>Create Account</h2>
+                    <p>Start your professional training today</p>
+                </div>
+                
+                <form id="register-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="first-name">First Name</label>
+                            <input type="text" id="first-name" class="form-control" required placeholder="First name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="last-name">Last Name</label>
+                            <input type="text" id="last-name" class="form-control" required placeholder="Last name">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" class="form-control" required placeholder="Enter your email">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" class="form-control" required placeholder="Enter your phone number">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="company">Company (Optional)</label>
+                        <input type="text" id="company" class="form-control" placeholder="Company name">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" class="form-control" required placeholder="Create a strong password">
+                        <div class="password-strength">
+                            <div class="strength-meter">
+                                <div class="strength-meter-fill" id="strength-meter"></div>
+                            </div>
+                            <div id="strength-text">Password strength: Weak</div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirm-password">Confirm Password</label>
+                        <input type="password" id="confirm-password" class="form-control" required placeholder="Confirm your password">
+                    </div>
+                    
+                    <div class="form-check">
+                        <input type="checkbox" id="terms" required>
+                        <label for="terms">
+                            I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>. I understand that Always Trucking & Loading LLC will use my information to provide training services and communicate about my progress.
+                        </label>
+                    </div>
+                    
+                    <div class="form-check">
+                        <input type="checkbox" id="marketing">
+                        <label for="marketing">
+                            I would like to receive updates about new courses, industry news, and special offers from Always Trucking & Loading LLC.
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+                </form>
+                
+                <div class="auth-footer">
+                    <p>Already have an account? <a href="login.html">Sign In</a></p>
+                </div>
+                
+                <div id="register-error" class="invalid-feedback" style="display: none; text-align: center; margin-top: 1rem;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/auth.js"></script>
+    <script src="js/agent-faq.js"></script>
+    <script src="js/agent-lee.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is already logged in
+            if (isLoggedIn()) {
+                window.location.href = 'dashboard.html';
+            }
+            
+            // Password strength checker
+            const passwordInput = document.getElementById('password');
+            const strengthMeter = document.getElementById('strength-meter');
+            const strengthText = document.getElementById('strength-text');
+            
+            passwordInput.addEventListener('input', function() {
+                const password = this.value;
+                const strength = calculatePasswordStrength(password);
+                
+                strengthMeter.className = 'strength-meter-fill';
+                
+                if (strength < 30) {
+                    strengthMeter.classList.add('strength-weak');
+                    strengthText.textContent = 'Password strength: Weak';
+                } else if (strength < 70) {
+                    strengthMeter.classList.add('strength-medium');
+                    strengthText.textContent = 'Password strength: Medium';
+                } else {
+                    strengthMeter.classList.add('strength-strong');
+                    strengthText.textContent = 'Password strength: Strong';
+                }
+            });
+            
+            // Registration form submission
+            const registerForm = document.getElementById('register-form');
+            const registerError = document.getElementById('register-error');
+            
+            registerForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const firstName = document.getElementById('first-name').value;
+                const lastName = document.getElementById('last-name').value;
+                const email = document.getElementById('email').value;
+                const phone = document.getElementById('phone').value;
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirm-password').value;
+                
+                // Reset error message
+                registerError.style.display = 'none';
+                
+                // Validate passwords match
+                if (password !== confirmPassword) {
+                    registerError.textContent = 'Passwords do not match';
+                    registerError.style.display = 'block';
+                    return;
+                }
+                
+                // Validate password strength
+                if (calculatePasswordStrength(password) < 30) {
+                    registerError.textContent = 'Password is too weak. Please use a stronger password.';
+                    registerError.style.display = 'block';
+                    return;
+                }
+                
+                const fullName = `${firstName} ${lastName}`;
+                
+                try {
+                    await registerUser(fullName, email, phone, password);
+                    // Show success message and redirect
+                    alert('Account created successfully! Welcome to Always Trucking & Loading LLC.');
+                    window.location.href = 'dashboard.html';
+                } catch (error) {
+                    registerError.textContent = error.message;
+                    registerError.style.display = 'block';
+                }
+            });
+        });
+        
+        // Password strength calculation
+        function calculatePasswordStrength(password) {
+            let strength = 0;
+            
+            if (password.length >= 8) strength += 25;
+            if (password.length >= 12) strength += 25;
+            if (/[a-z]/.test(password)) strength += 10;
+            if (/[A-Z]/.test(password)) strength += 10;
+            if (/[0-9]/.test(password)) strength += 10;
+            if (/[^A-Za-z0-9]/.test(password)) strength += 20;
+            
+            return Math.min(strength, 100);
+        }
+    </script>
+    
+    <footer style="background-color: #f8f9fa; padding: 1rem; text-align: center; margin-top: 2rem; font-size: 0.9rem; color: #6c757d;">
+        <p>Always Trucking & Loading LLC is an equal opportunity employer | Milwaukee, Wisconsin | (414) 239-9333 | (414) 982-7034</p>
+        <p>© 2025 Always Trucking & Loading LLC. All rights reserved.</p>
+    </footer>
+</body>
+</html>

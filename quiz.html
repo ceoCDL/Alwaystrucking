@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Quiz | Always Trucking & Loading LLC</title>
+    <meta name="description" content="Take a quiz to test your knowledge and earn your certification">
+    
+    <!-- External Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Local Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Agent Lee Scripts -->
+    <script src="js/agent-faq.js"></script>
+    <script src="js/agent-lee.js"></script>
+    
+    <style>
+        /* Quiz specific styles */
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .quiz-header h1 {
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+        
+        .quiz-header p {
+            color: #6c757d;
+        }
+        
+        .quiz-info {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .quiz-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .quiz-info-item {
+            display: flex;
+            align-items: center;
+        }
+        
+        .quiz-info-item i {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-right: 1rem;
+        }
+        
+        .quiz-progress {
+            margin-bottom: 2rem;
+        }
+        
+        .progress-indicator {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+        
+        .progress-text {
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+        
+        .progress-count {
+            color: #6c757d;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background-color: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        
+        .quiz-question {
+            margin-bottom: 2rem;
+        }
+        
+        .question-number {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            width: 28px;
+            height: 28px;
+            line-height: 28px;
+            text-align: center;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .question-text {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+        
+        .options-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .option-item {
+            margin-bottom: 1rem;
+        }
+        
+        .option-label {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .option-label:hover {
+            border-color: #ced4da;
+        }
+        
+        .option-radio {
+            margin-right: 1rem;
+        }
+        
+        .option-text {
+            font-size: 1rem;
+        }
+        
+        .option-selected {
+            border-color: var(--primary-color);
+            background-color: rgba(0, 123, 255, 0.05);
+        }
+        
+        .option-correct {
+            border-color: var(--success-color);
+            background-color: rgba(40, 167, 69, 0.05);
+        }
+        
+        .option-incorrect {
+            border-color: var(--danger-color);
+            background-color: rgba(220, 53, 69, 0.05);
+        }
+        
+        .quiz-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+        
+        .quiz-feedback {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            display: none;
+        }
+        
+        .feedback-correct {
+            background-color: rgba(40, 167, 69, 0.1);
+            border: 1px solid var(--success-color);
+            color: var(--success-color);
+        }
+        
+        .feedback-incorrect {
+            background-color: rgba(220, 53, 69, 0.1);
+            border: 1px solid var(--danger-color);
+            color: var(--danger-color);
+        }
+        
+        .quiz-results {
+            text-align: center;
+            padding: 2rem;
+            display: none;
+        }
+        
+        .results-icon {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .results-icon.passed {
+            color: var(--success-color);
+        }
+        
+        .results-icon.failed {
+            color: var(--danger-color);
+        }
+        
+        .results-score {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .results-message {
+            margin-bottom: 2rem;
+        }
+        
+        .results-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .quiz-timer {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background-color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+        }
+        
+        .quiz-timer i {
+            margin-right: 0.5rem;
+            color: var(--primary-color);
+        }
+        
+        .quiz-timer.warning {
+            color: var(--warning-color);
+        }
+        
+        .quiz-timer.danger {
+            color: var(--danger-color);
+        }
+        
+        @media (max-width: 768px) {
+            .quiz-container {
+                padding: 1.5rem;
+            }
+            
+            .quiz-info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .quiz-navigation {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .quiz-navigation .btn {
+                width: 100%;
+            }
+            
+            .results-actions {
+                flex-direction: column;
+            }
+            
+            .results-actions .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand">
+                <img src="https://public.youware.com/users-website-assets/prod/87705be6-6621-4fdf-88c9-49587a2c3371/g1be15eaf13efa22089a907caeaf0b3d10b7aecf6f90308c453d1ec8a45fc4b90e10a545c76e2ac885c24dfb30f4342f604892e0a730b396bc00139a8599ccaee_640.png" alt="Always Trucking Logo">
+                <h1>Always Trucking & Loading LLC</h1>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="dashboard.html" class="nav-link">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a href="courses.html" class="nav-link">Courses</a>
+                </li>
+                <li class="nav-item">
+                    <a href="dashboard.html#certificates" class="nav-link">Certificates</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" id="logout-button" class="nav-link">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Quiz Timer -->
+    <div class="quiz-timer" id="quiz-timer">
+        <i class="fas fa-clock"></i>
+        <span id="timer-display">15:00</span>
+    </div>
+
+    <!-- Quiz Container -->
+    <section style="padding: 4rem 0; background-color: #f8f9fa;">
+        <div class="container">
+            <div class="quiz-container">
+                <!-- Quiz Header -->
+                <div class="quiz-header">
+                    <h1 id="quiz-title">Course Title: Final Quiz</h1>
+                    <p>Complete this quiz to earn your certification</p>
+                </div>
+                
+                <!-- Quiz Info -->
+                <div class="quiz-info">
+                    <div class="quiz-info-grid">
+                        <div class="quiz-info-item">
+                            <i class="fas fa-question-circle"></i>
+                            <div>
+                                <strong id="quiz-question-count">10</strong> Questions
+                            </div>
+                        </div>
+                        
+                        <div class="quiz-info-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <strong>15</strong> Minutes
+                            </div>
+                        </div>
+                        
+                        <div class="quiz-info-item">
+                            <i class="fas fa-award"></i>
+                            <div>
+                                <strong id="quiz-passing-score">70%</strong> to Pass
+                            </div>
+                        </div>
+                        
+                        <div class="quiz-info-item">
+                            <i class="fas fa-redo"></i>
+                            <div>
+                                <strong>3</strong> Attempts
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Quiz Progress -->
+                <div class="quiz-progress">
+                    <div class="progress-indicator">
+                        <div class="progress-text">Progress</div>
+                        <div class="progress-count"><span id="current-question">1</span>/<span id="total-questions">10</span></div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill" style="width: 10%;"></div>
+                    </div>
+                </div>
+                
+                <!-- Quiz Content -->
+                <div id="quiz-content">
+                    <!-- Questions will be loaded here dynamically -->
+                    <div class="quiz-question" id="question-container">
+                        <h3 class="question-text"><span class="question-number">1</span> <span id="question-text">What is the maximum driving time allowed before a required 30-minute break?</span></h3>
+                        
+                        <ul class="options-list" id="options-list">
+                            <li class="option-item">
+                                <label class="option-label">
+                                    <input type="radio" name="q1" value="a" class="option-radio">
+                                    <span class="option-text">6 hours</span>
+                                </label>
+                            </li>
+                            <li class="option-item">
+                                <label class="option-label">
+                                    <input type="radio" name="q1" value="b" class="option-radio">
+                                    <span class="option-text">8 hours</span>
+                                </label>
+                            </li>
+                            <li class="option-item">
+                                <label class="option-label">
+                                    <input type="radio" name="q1" value="c" class="option-radio">
+                                    <span class="option-text">10 hours</span>
+                                </label>
+                            </li>
+                            <li class="option-item">
+                                <label class="option-label">
+                                    <input type="radio" name="q1" value="d" class="option-radio">
+                                    <span class="option-text">12 hours</span>
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="quiz-feedback" id="quiz-feedback">
+                        <!-- Feedback message will be displayed here -->
+                    </div>
+                    
+                    <div class="quiz-navigation">
+                        <button class="btn btn-secondary" id="prev-btn" disabled>Previous</button>
+                        <button class="btn btn-primary" id="next-btn">Next Question</button>
+                    </div>
+                </div>
+                
+                <!-- Quiz Results (initially hidden) -->
+                <div class="quiz-results" id="quiz-results">
+                    <div class="results-icon" id="results-icon">
+                        <i class="fas fa-check-circle passed"></i>
+                    </div>
+                    
+                    <div class="results-score" id="results-score">
+                        Score: 90%
+                    </div>
+                    
+                    <div class="results-message" id="results-message">
+                        Congratulations! You have passed the quiz and earned your certification.
+                    </div>
+                    
+                    <div class="results-actions">
+                        <a href="dashboard.html#certificates" class="btn btn-primary">View Certificate</a>
+                        <a href="dashboard.html" class="btn btn-secondary">Return to Dashboard</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h3>Always Trucking & Loading LLC</h3>
+                    <p>Professional driver training and education for the modern trucking industry. Committed to safety, compliance, and excellence.</p>
+                </div>
+                
+                <div>
+                    <h3>Training Courses</h3>
+                    <ul class="footer-links">
+                        <li><a href="courses.html">CDL Continuing Education</a></li>
+                        <li><a href="courses.html">Dispatcher Training</a></li>
+                        <li><a href="courses.html">Hours of Service Compliance</a></li>
+                        <li><a href="courses.html">Vehicle Inspection</a></li>
+                        <li><a href="courses.html">Defensive Driving</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="index.html#contact">Contact Support</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">DSPS Compliance</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3>Connect With Us</h3>
+                    <ul class="footer-links">
+                        <li><a href="mailto:training@alwaystrucking.com">training@alwaystrucking.com</a></li>
+                        <li><a href="tel:+1-800-TRUCKING">1-800-TRUCKING</a></li>
+                        <li><a href="#">LinkedIn</a></li>
+                        <li><a href="#">Facebook</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Always Trucking & Loading LLC. All rights reserved. | Training Hub Master Plan</p>
+                <p>Always double-check with DSPS for your specific situation.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/auth.js"></script>
+    <script src="js/agent-faq.js"></script>
+    <script src="js/agent-lee.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is logged in
+            if (!isLoggedIn()) {
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            // Get course ID and quiz data from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const courseId = parseInt(urlParams.get('id') || '1');
+            
+            // Set up quiz elements
+            const quizTitle = document.getElementById('quiz-title');
+            const questionContainer = document.getElementById('question-container');
+            const optionsList = document.getElementById('options-list');
+            const currentQuestionElem = document.getElementById('current-question');
+            const totalQuestionsElem = document.getElementById('total-questions');
+            const progressFill = document.getElementById('progress-fill');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const quizFeedback = document.getElementById('quiz-feedback');
+            const quizResults = document.getElementById('quiz-results');
+            const quizContent = document.getElementById('quiz-content');
+            const resultsIcon = document.getElementById('results-icon');
+            const resultsScore = document.getElementById('results-score');
+            const resultsMessage = document.getElementById('results-message');
+            const timerDisplay = document.getElementById('timer-display');
+            
+            // Sample quiz data (this would come from the backend in a real app)
+            const quizData = getQuizData(courseId);
+            
+            // Initialize quiz state
+            let currentQuestion = 0;
+            let userAnswers = Array(quizData.questions.length).fill(null);
+            let quizCompleted = false;
+            let timeLeft = 15 * 60; // 15 minutes in seconds
+            
+            // Set quiz info
+            quizTitle.textContent = `${quizData.title}: Final Quiz`;
+            totalQuestionsElem.textContent = quizData.questions.length;
+            document.getElementById('quiz-question-count').textContent = quizData.questions.length;
+            document.getElementById('quiz-passing-score').textContent = `${quizData.passingScore}%`;
+            
+            // Initialize the first question
+            loadQuestion(currentQuestion);
+            
+            // Start the timer
+            const timerInterval = setInterval(updateTimer, 1000);
+            
+            // Event listeners
+            prevBtn.addEventListener('click', function() {
+                if (currentQuestion > 0) {
+                    currentQuestion--;
+                    loadQuestion(currentQuestion);
+                }
+            });
+            
+            nextBtn.addEventListener('click', function() {
+                if (quizCompleted) {
+                    showResults();
+                    return;
+                }
+                
+                const selectedOption = document.querySelector(`input[name="q${currentQuestion + 1}"]:checked`);
+                
+                if (!selectedOption) {
+                    alert('Please select an answer before proceeding.');
+                    return;
+                }
+                
+                userAnswers[currentQuestion] = selectedOption.value;
+                
+                if (currentQuestion < quizData.questions.length - 1) {
+                    // Move to next question
+                    currentQuestion++;
+                    loadQuestion(currentQuestion);
+                } else {
+                    // Last question - change button text
+                    nextBtn.textContent = 'Submit Quiz';
+                    quizCompleted = true;
+                }
+            });
+            
+            // Load a question by index
+            function loadQuestion(index) {
+                const question = quizData.questions[index];
+                
+                // Update progress
+                currentQuestionElem.textContent = index + 1;
+                const progressPercent = ((index + 1) / quizData.questions.length) * 100;
+                progressFill.style.width = `${progressPercent}%`;
+                
+                // Update navigation buttons
+                prevBtn.disabled = index === 0;
+                if (index < quizData.questions.length - 1) {
+                    nextBtn.textContent = 'Next Question';
+                } else if (!quizCompleted) {
+                    nextBtn.textContent = 'Submit Quiz';
+                }
+                
+                // Set question text
+                document.querySelector('#question-container .question-number').textContent = index + 1;
+                document.getElementById('question-text').textContent = question.text;
+                
+                // Clear previous options
+                optionsList.innerHTML = '';
+                
+                // Add options
+                question.options.forEach((option, optionIndex) => {
+                    const optionValue = String.fromCharCode(97 + optionIndex); // a, b, c, d...
+                    const li = document.createElement('li');
+                    li.className = 'option-item';
+                    
+                    const label = document.createElement('label');
+                    label.className = 'option-label';
+                    
+                    const input = document.createElement('input');
+                    input.type = 'radio';
+                    input.name = `q${index + 1}`;
+                    input.value = optionValue;
+                    input.className = 'option-radio';
+                    
+                    // Check if user has already answered this question
+                    if (userAnswers[index] === optionValue) {
+                        input.checked = true;
+                        label.classList.add('option-selected');
+                    }
+                    
+                    input.addEventListener('change', function() {
+                        // Remove selected class from all options
+                        document.querySelectorAll(`.option-label`).forEach(el => {
+                            el.classList.remove('option-selected');
+                        });
+                        
+                        // Add selected class to clicked option
+                        if (this.checked) {
+                            label.classList.add('option-selected');
+                        }
+                    });
+                    
+                    const span = document.createElement('span');
+                    span.className = 'option-text';
+                    span.textContent = option;
+                    
+                    label.appendChild(input);
+                    label.appendChild(span);
+                    li.appendChild(label);
+                    optionsList.appendChild(li);
+                });
+                
+                // Hide feedback
+                quizFeedback.style.display = 'none';
+            }
+            
+            // Show quiz results
+            function showResults() {
+                // Calculate score
+                let correctAnswers = 0;
+                
+                userAnswers.forEach((answer, index) => {
+                    if (answer === quizData.questions[index].correctAnswer) {
+                        correctAnswers++;
+                    }
+                });
+                
+                const scorePercent = Math.round((correctAnswers / quizData.questions.length) * 100);
+                const passed = scorePercent >= quizData.passingScore;
+                
+                // Update results elements
+                resultsScore.textContent = `Score: ${scorePercent}%`;
+                
+                if (passed) {
+                    resultsIcon.innerHTML = '<i class="fas fa-check-circle passed"></i>';
+                    resultsMessage.textContent = 'Congratulations! You have passed the quiz and earned your certification.';
+                } else {
+                    resultsIcon.innerHTML = '<i class="fas fa-times-circle failed"></i>';
+                    resultsMessage.textContent = `You did not pass the quiz. You need ${quizData.passingScore}% to pass. Please review the course material and try again.`;
+                }
+                
+                // Hide quiz content and show results
+                quizContent.style.display = 'none';
+                quizResults.style.display = 'block';
+                
+                // If passed, update user progress in the course
+                if (passed) {
+                    try {
+                        const currentUser = getCurrentUser();
+                        if (currentUser) {
+                            // Update user progress to 100% completed
+                            updateUserProgress(currentUser.email, courseId, 100, true);
+                        }
+                    } catch (error) {
+                        console.error('Error updating progress:', error);
+                    }
+                }
+                
+                // Clear timer
+                clearInterval(timerInterval);
+            }
+            
+            // Update timer display
+            function updateTimer() {
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    alert('Time is up! Your quiz will be submitted automatically.');
+                    showResults();
+                    return;
+                }
+                
+                timeLeft--;
+                
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                
+                // Format display
+                timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                // Add warning colors
+                const timerElement = document.getElementById('quiz-timer');
+                if (timeLeft <= 300) { // 5 minutes
+                    timerElement.classList.add('warning');
+                }
+                if (timeLeft <= 60) { // 1 minute
+                    timerElement.classList.remove('warning');
+                    timerElement.classList.add('danger');
+                }
+            }
+            
+            // Generate quiz data based on course ID
+            function getQuizData(courseId) {
+                // Sample quiz data for demonstration
+                const quizzes = {
+                    1: {
+                        title: "CDL Continuing Education",
+                        passingScore: 70,
+                        questions: [
+                            {
+                                text: "What is the maximum driving time allowed before a required 30-minute break?",
+                                options: ["6 hours", "8 hours", "10 hours", "12 hours"],
+                                correctAnswer: "b" // 8 hours
+                            },
+                            {
+                                text: "What is the maximum allowed on-duty time in a 14-hour period?",
+                                options: ["10 hours", "11 hours", "14 hours", "15 hours"],
+                                correctAnswer: "b" // 11 hours
+                            },
+                            {
+                                text: "How long must a driver be off-duty before starting a new work period?",
+                                options: ["8 consecutive hours", "10 consecutive hours", "12 consecutive hours", "14 consecutive hours"],
+                                correctAnswer: "b" // 10 consecutive hours
+                            },
+                            {
+                                text: "Which of the following is NOT required in a pre-trip inspection?",
+                                options: ["Checking tire pressure", "Testing engine oil quality with a test kit", "Inspecting brake systems", "Checking lights and reflectors"],
+                                correctAnswer: "b" // Testing engine oil quality
+                            },
+                            {
+                                text: "When driving in fog, you should:",
+                                options: ["Use high beam headlights", "Increase your speed to get through quickly", "Use low beam headlights", "Follow closely behind other vehicles"],
+                                correctAnswer: "c" // Use low beam headlights
+                            }
+                        ]
+                    },
+                    2: {
+                        title: "Dispatcher Training",
+                        passingScore: 75,
+                        questions: [
+                            {
+                                text: "Which factor is most important when assigning loads to drivers?",
+                                options: ["Driver's hometown", "Available hours of service", "Driver's age", "Size of the truck"],
+                                correctAnswer: "b" // Available hours of service
+                            },
+                            {
+                                text: "What is the primary purpose of a Transportation Management System (TMS)?",
+                                options: ["Employee time tracking", "Fuel cost accounting", "Load planning and management", "Vehicle maintenance scheduling"],
+                                correctAnswer: "c" // Load planning and management
+                            },
+                            {
+                                text: "When a customer requests a delivery time that cannot be met due to HOS regulations, the dispatcher should:",
+                                options: ["Tell the driver to hurry", "Ignore HOS regulations just this once", "Negotiate a different delivery time with the customer", "Assign a different load to the driver"],
+                                correctAnswer: "c" // Negotiate a different delivery time
+                            }
+                        ]
+                    }
+                };
+                
+                // Return quiz data for the requested course, or a default if not found
+                return quizzes[courseId] || quizzes[1];
+            }
+        });
+    </script>
+</body>
+</html>

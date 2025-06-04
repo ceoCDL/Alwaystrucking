@@ -1,0 +1,572 @@
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course | Always Trucking &amp; Loading LLC</title>
+<meta name="description" content="Training course from Always Trucking &amp; Loading LLC">
+<!-- External Fonts --><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&amp;family=Roboto:wght@300;400;500&amp;display=swap" rel="stylesheet">
+<!-- Font Awesome Icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<!-- Local Styles --><link rel="stylesheet" href="css/styles.css">
+<!-- Agent Lee Scripts -->
+<script src="js/agent-faq.js"></script>
+<script src="js/agent-lee.js"></script>
+<style>
+        /* Course specific styles */
+        .course-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 2rem 0;
+        }
+        
+        .course-header h1 {
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+        
+        .course-header p {
+            margin-bottom: 0;
+            opacity: 0.9;
+        }
+        
+        .course-container {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .course-sidebar {
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: var(--box-shadow);
+            padding: 1.5rem;
+            align-self: start;
+            position: sticky;
+            top: 2rem;
+        }
+        
+        .course-sidebar h3 {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .module-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .module-list li {
+            margin-bottom: 1rem;
+        }
+        
+        .module-list a {
+            display: block;
+            padding: 0.75rem;
+            border-radius: 0.25rem;
+            color: var(--dark-color);
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        
+        .module-list a:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .module-list a.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .course-content {
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: var(--box-shadow);
+            padding: 2rem;
+        }
+        
+        .module-progress {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .progress-bar {
+            flex: 1;
+            height: 8px;
+            background-color: #e9ecef;
+            border-radius: 4px;
+            margin-right: 1rem;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        
+        .progress-text {
+            font-size: 0.875rem;
+            color: #6c757d;
+            white-space: nowrap;
+        }
+        
+        .module-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .video-container {
+            width: 100%;
+            margin-bottom: 2rem;
+        }
+        
+        .video-container iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+            border-radius: 0.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .course-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .course-sidebar {
+                position: static;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand">
+                <a href="index.html">
+                    <img src="nvcqdjvkw0.png" alt="Always Trucking Logo" class="logo-img">
+                </a>
+                <h1>Always Trucking &amp; Loading LLC</h1>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="courses.html" class="nav-link active">Courses</a>
+                </li>
+                <li class="nav-item">
+                    <a href="faq.html" class="nav-link">FAQ</a>
+                </li>
+                <li class="nav-item">
+                    <a href="dashboard.html" class="nav-link" id="dashboard-link">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" id="logout-button" class="nav-link btn btn-outline">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav><!-- Course Header -->
+    <section class="course-header" style="background: linear-gradient(135deg, var(--primary-color) 0%, #004a8c 100%);">
+        <div class="container" style="text-align: center;">
+            <img src="nvcqdjvkw0.png" alt="Always Trucking Logo" style="height: 60px; width: auto; margin-bottom: 1rem;">
+            <h1 id="course-title">Course Title</h1>
+            <p id="course-description">Course description will be loaded here.</p>
+        </div>
+    </section><!-- Course Content --><div class="container">
+        <div class="course-container">
+            <!-- Course Sidebar -->
+            <div class="course-sidebar">
+                <h3>Course Modules</h3>
+                <ul class="module-list" id="module-list">
+<li><a href="#module-1" class="active" onclick="loadModule(1)">Introduction to the Course</a></li>
+                    <li><a href="#module-2" onclick="loadModule(2)">Key Regulations and Updates</a></li>
+                    <li><a href="#module-3" onclick="loadModule(3)">Safety Best Practices</a></li>
+                    <li><a href="#module-4" onclick="loadModule(4)">Industry Standards</a></li>
+                    <li><a href="#module-5" onclick="loadModule(5)">Practical Applications</a></li>
+                    <li><a href="#module-6" onclick="loadModule(6)">Case Studies</a></li>
+                    <li><a href="#module-7" onclick="loadModule(7)">Assessment and Evaluation</a></li>
+                    <li><a href="#module-8" onclick="loadModule(8)">Final Quiz and Certification</a></li>
+                </ul>
+</div>
+            
+            <!-- Course Content -->
+            <div class="course-content">
+                <div class="module-progress">
+                    <div class="progress-bar">
+                        <div class="progress" id="module-progress-bar" style="width: 12.5%"></div>
+                    </div>
+                    <div class="progress-text" id="module-progress-text">Module 1 of 8 (12.5%)</div>
+                </div>
+                
+                <div id="module-content">
+                    <h2>Module 1: Introduction to the Course</h2>
+                    
+                    <div class="video-container"><div class="video-container">
+    <!-- Main course video -->
+    <img src="7edo5xh1do.png" alt="Truck inspection training" style="width: 100%; height: 400px; object-fit: cover; border-radius: 0.5rem;">
+</div></div>
+                    
+                    <h3>Course Objectives</h3>
+                    <p>By the end of this course, you will be able to:</p>
+                    <ul>
+<li>Understand current regulations and compliance requirements for CDL holders</li>
+                        <li>Implement safety best practices in your daily operations</li>
+                        <li>Stay updated with industry standards and changes</li>
+                        <li>Apply practical solutions to common challenges faced by professional drivers</li>
+                        <li>Successfully complete assessment requirements for certification</li>
+                    </ul>
+<h3>Course Structure</h3>
+                    <p>This course is divided into 8 modules, each focusing on a specific aspect of CDL continuing education. You will need to complete each module sequentially, including any quizzes or assignments, before moving to the next.</p>
+                    
+                    <h3>Module Resources</h3>
+                    <p>Each module includes:</p>
+                    <ul>
+<li>Video lessons with professional instruction</li>
+                        <li>Supplementary reading materials</li>
+                        <li>Practice exercises and self-assessment quizzes</li>
+                        <li>Downloadable resources for future reference</li>
+                    </ul>
+<div class="module-nav">
+                        <button class="btn btn-secondary" disabled>Previous Module</button>
+                        <button class="btn btn-primary" onclick="markComplete(1); loadModule(2);">Complete &amp; Continue</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer"><div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h3>Always Trucking &amp; Loading LLC</h3>
+                    <p>Professional driver training and education for the modern trucking industry. Committed to safety, compliance, and excellence.</p>
+                </div>
+                
+                <div>
+                    <h3>Training Courses</h3>
+                    <ul class="footer-links">
+<li><a href="#">CDL Continuing Education</a></li>
+                        <li><a href="#">Dispatcher Training</a></li>
+                        <li><a href="#">Hours of Service Compliance</a></li>
+                        <li><a href="#">Vehicle Inspection</a></li>
+                        <li><a href="#">Defensive Driving</a></li>
+                    </ul>
+</div>
+                
+                <div>
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+<li><a href="#">Support Center</a></li>
+                        <li><a href="#">Contact Support</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">DSPS Compliance</a></li>
+                    </ul>
+</div>
+                
+                <div>
+                    <h3>Connect With Us</h3>
+                    <ul class="footer-links">
+<li><a href="mailto:training@alwaystrucking.com">training@alwaystrucking.com</a></li>
+                        <li><a href="tel:+1-800-TRUCKING">1-800-TRUCKING</a></li>
+                        <li><a href="#">LinkedIn</a></li>
+                        <li><a href="#">Facebook</a></li>
+                    </ul>
+</div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2025 Always Trucking &amp; Loading LLC. All rights reserved. | Training Hub Master Plan</p>
+                <p>Always double-check with DSPS for your specific situation.</p>
+            </div>
+        </div>
+    </footer><!-- JavaScript --><script src="js/auth.js"></script><script src="js/agent-faq.js"></script><script src="js/agent-lee.js"></script><script>
+        // Get course ID from URL
+        function getCourseId() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return parseInt(urlParams.get('id') || '1');
+        }
+        
+        // Initialize course data
+        let currentCourse = null;
+        let currentModule = 1;
+        let totalModules = 8;
+        
+        // Load course data when page loads
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Check if user is logged in
+            if (!isLoggedIn()) {
+                window.location.href = 'index.html';
+                return;
+            }
+            
+            try {
+                // Get course ID from URL
+                const courseId = getCourseId();
+                
+                // Get course data
+                currentCourse = await getCourseById(courseId);
+                
+                if (currentCourse) {
+                    // Update course title and description
+                    document.getElementById('course-title').textContent = currentCourse.title;
+                    document.getElementById('course-description').textContent = currentCourse.description;
+                    
+                    // Update total modules
+                    totalModules = currentCourse.modules || 8;
+                    
+                    // Update module list
+                    updateModuleList();
+                    
+                    // Load first module
+                    loadModule(1);
+                } else {
+                    alert('Course not found');
+                    window.location.href = 'dashboard.html';
+                }
+            } catch (error) {
+                console.error('Error loading course:', error);
+                alert('Error loading course. Please try again.');
+            }
+        });
+        
+        // Update module list based on course data
+        function updateModuleList() {
+            const moduleList = document.getElementById('module-list');
+            
+            if (moduleList && currentCourse) {
+                moduleList.innerHTML = '';
+                
+                for (let i = 1; i <= totalModules; i++) {
+                    const li = document.createElement('li');
+                    const a = document.createElement('a');
+                    
+                    a.href = `#module-${i}`;
+                    a.textContent = `Module ${i}: ${getModuleTitle(i)}`;
+                    a.onclick = function() { loadModule(i); };
+                    
+                    if (i === currentModule) {
+                        a.className = 'active';
+                    }
+                    
+                    li.appendChild(a);
+                    moduleList.appendChild(li);
+                }
+            }
+        }
+        
+        // Get module title based on module number and course type
+        function getModuleTitle(moduleNum) {
+            // This would typically come from the backend, but we'll use a simple lookup for demo
+            const titles = {
+                cdl: [
+                    'Introduction to the Course',
+                    'Key Regulations and Updates',
+                    'Safety Best Practices',
+                    'Industry Standards',
+                    'Practical Applications',
+                    'Case Studies',
+                    'Assessment and Evaluation',
+                    'Final Quiz and Certification'
+                ],
+                dispatcher: [
+                    'Introduction to Dispatching',
+                    'Load Planning Fundamentals',
+                    'Communication Strategies',
+                    'TMS Software Overview',
+                    'Regulatory Compliance',
+                    'Customer Service Skills',
+                    'Final Assessment'
+                ],
+                compliance: [
+                    'Hours of Service Basics',
+                    'Federal Regulations',
+                    'ELD Usage and Best Practices',
+                    'Recordkeeping Requirements',
+                    'Compliance Assessment'
+                ]
+            };
+            
+            const category = currentCourse.category || 'cdl';
+            const categoryTitles = titles[category] || titles.cdl;
+            
+            return categoryTitles[moduleNum - 1] || `Module ${moduleNum}`;
+        }
+        
+        // Load module content
+        function loadModule(moduleNum) {
+            // Update current module
+            currentModule = moduleNum;
+            
+            // Update active module in sidebar
+            const moduleLinks = document.querySelectorAll('.module-list a');
+            moduleLinks.forEach(link => link.classList.remove('active'));
+            
+            const activeLink = document.querySelector(`.module-list a[href="#module-${moduleNum}"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
+            
+            // Update progress bar
+            const progressPercent = (moduleNum / totalModules) * 100;
+            document.getElementById('module-progress-bar').style.width = `${progressPercent}%`;
+            document.getElementById('module-progress-text').textContent = `Module ${moduleNum} of ${totalModules} (${Math.round(progressPercent)}%)`;
+            
+            // Update module content (this would typically load from a backend)
+            const moduleContent = document.getElementById('module-content');
+            
+            // Simple placeholder content for demo
+            moduleContent.innerHTML = `
+                <h2>Module ${moduleNum}: ${getModuleTitle(moduleNum)}</h2>
+                
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Module ${moduleNum}" allowfullscreen></iframe>
+                </div>
+                
+                <h3>Module Objectives</h3>
+                <p>In this module, you will learn about the key concepts and practices related to ${getModuleTitle(moduleNum)}.</p>
+                
+                <h3>Key Concepts</h3>
+                <ul>
+                    <li>Understanding the fundamental principles of ${getModuleTitle(moduleNum)}</li>
+                    <li>Implementing best practices in your daily operations</li>
+                    <li>Navigating common challenges and finding solutions</li>
+                    <li>Applying knowledge to real-world scenarios</li>
+                </ul>
+                
+                <h3>Practice Exercise</h3>
+                <p>Complete the following exercise to test your understanding of the module content:</p>
+                <ol>
+                    <li>Review the main concepts presented in the video</li>
+                    <li>Apply these concepts to your current role and responsibilities</li>
+                    <li>Identify areas where you can improve or implement new practices</li>
+                    <li>Document your findings for future reference</li>
+                </ol>
+                
+                <div class="module-nav">
+                    ${moduleNum > 1 ? `<button class="btn btn-secondary" onclick="loadModule(${moduleNum - 1})">Previous Module</button>` : `<button class="btn btn-secondary" disabled>Previous Module</button>`}
+                    ${moduleNum < totalModules ? `<button class="btn btn-primary" onclick="markComplete(${moduleNum}); loadModule(${moduleNum + 1});">Complete & Continue</button>` : `<button class="btn btn-primary" onclick="completeCourse()">Complete Course</button>`}
+                </div>
+            `;
+        }
+        
+        // Mark module as complete
+        async function markComplete(moduleNum) {
+            try {
+                if (!currentCourse) {
+                    throw new Error('Course not loaded');
+                }
+                
+                const currentUser = getCurrentUser();
+                
+                if (!currentUser) {
+                    throw new Error('User not logged in');
+                }
+                
+                // Calculate progress percentage
+                const progressPercent = Math.min(100, Math.round((moduleNum / totalModules) * 100));
+                
+                // Update user progress
+                await updateUserProgress(
+                    currentUser.email,
+                    currentCourse.id,
+                    progressPercent,
+                    moduleNum >= totalModules // Completed if on last module
+                );
+                
+                console.log(`Module ${moduleNum} marked as complete. Progress: ${progressPercent}%`);
+            } catch (error) {
+                console.error('Error updating progress:', error);
+            }
+        }
+        
+        // Complete the course
+        async function completeCourse() {
+            try {
+                if (!currentCourse) {
+                    throw new Error('Course not loaded');
+                }
+                
+                const currentUser = getCurrentUser();
+                
+                if (!currentUser) {
+                    throw new Error('User not logged in');
+                }
+                
+                // Update user progress to 100%
+                await updateUserProgress(
+                    currentUser.email,
+                    currentCourse.id,
+                    100,
+                    true
+                );
+                
+                alert('Congratulations! You have completed the course. Your certificate is available on your dashboard.');
+                
+                // Redirect to dashboard
+                window.location.href = 'dashboard.html#certificates';
+            } catch (error) {
+                console.error('Error completing course:', error);
+                alert('Error completing course. Please try again.');
+            }
+        }
+    </script>
+    
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <img src="nvcqdjvkw0.png" alt="Always Trucking & Loading LLC Logo" class="footer-logo" style="width: 120px; height: auto; margin-bottom: 1rem;">
+                    <h3>Always Trucking &amp; Loading LLC</h3>
+                    <p>Professional driver training and education for the modern trucking industry. Committed to safety, compliance, and excellence.</p>
+                    <p><strong>We are an equal opportunity employer.</strong></p>
+                </div>
+                
+                <div>
+                    <h3>Training Courses</h3>
+                    <ul class="footer-links">
+                        <li><a href="courses.html">CDL Continuing Education</a></li>
+                        <li><a href="courses.html">Dispatcher Training</a></li>
+                        <li><a href="courses.html">Hours of Service Compliance</a></li>
+                        <li><a href="courses.html">Vehicle Inspection</a></li>
+                        <li><a href="courses.html">Defensive Driving</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="index.html#contact">Contact Support</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">FMCSA Compliance</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3>Connect With Us</h3>
+                    <ul class="footer-links">
+                        <li><a href="mailto:training@alwaystrucking.com">training@alwaystrucking.com</a></li>
+                        <li><a href="tel:+14142399333">(414) 239-9333</a></li>
+                        <li><a href="tel:+14149827034">(414) 982-7034</a></li>
+                        <li>Milwaukee, Wisconsin</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2025 Always Trucking &amp; Loading LLC. All rights reserved. | Training Hub Master Plan</p>
+                <p>Always Trucking & Loading LLC is an equal opportunity employer.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

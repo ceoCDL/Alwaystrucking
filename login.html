@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Always Trucking & Loading LLC</title>
+    <meta name="description" content="Login to your Always Trucking & Loading LLC training account">
+    
+    <!-- External Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Local Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Agent Lee Scripts -->
+    <script src="js/agent-faq.js"></script>
+    <script src="js/agent-lee.js"></script>
+    
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        
+        .auth-page {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        .auth-image {
+            flex: 1;
+            background-image: url('https://public.youware.com/users-website-assets/prod/87705be6-6621-4fdf-88c9-49587a2c3371/gc5f8460d21ea89d2f41017ebef4c1563e608aeba67eb313dc275fe229ee84101111ef506c0ed3bbe21d437bf680aed9c3e5af01ba7ae64bd7445b4b3f8e09706_1280.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .auth-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 86, 179, 0.7);
+        }
+        
+        .auth-image-content {
+            position: relative;
+            color: white;
+            text-align: center;
+            max-width: 500px;
+            padding: 2rem;
+        }
+        
+        .auth-image-content h2 {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .auth-image-content p {
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+        }
+        
+        .auth-form-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        
+        .auth-form-wrapper {
+            width: 100%;
+            max-width: 450px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 3rem;
+        }
+        
+        .auth-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .auth-logo img {
+            height: 40px;
+            margin-right: 1rem;
+        }
+        
+        .auth-logo h1 {
+            font-size: 1.5rem;
+            margin: 0;
+        }
+        
+        .auth-title {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .auth-title h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .auth-title p {
+            color: #6c757d;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+        }
+        
+        .form-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .remember-me {
+            display: flex;
+            align-items: center;
+        }
+        
+        .remember-me input {
+            margin-right: 0.5rem;
+        }
+        
+        .forgot-password {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+        
+        .btn-block {
+            width: 100%;
+            padding: 0.875rem;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 2rem 0;
+            color: #6c757d;
+        }
+        
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background-color: #e9ecef;
+        }
+        
+        .divider span {
+            padding: 0 1rem;
+        }
+        
+        .social-login {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .social-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem;
+            border: 1px solid #e9ecef;
+            border-radius: 5px;
+            background-color: white;
+            color: #495057;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .social-btn:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .social-btn i {
+            margin-right: 0.5rem;
+            font-size: 1.25rem;
+        }
+        
+        .auth-footer {
+            text-align: center;
+            margin-top: 2rem;
+            color: #6c757d;
+        }
+        
+        .auth-footer a {
+            color: var(--primary-color);
+            font-weight: 500;
+            text-decoration: none;
+        }
+        
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Form validation */
+        .form-control.is-invalid {
+            border-color: var(--danger-color);
+        }
+        
+        .invalid-feedback {
+            color: var(--danger-color);
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+        
+        @media (max-width: 992px) {
+            .auth-page {
+                flex-direction: column;
+            }
+            
+            .auth-image {
+                min-height: 300px;
+            }
+            
+            .auth-form-wrapper {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand">
+                <a href="index.html">
+                    <img src="nvcqdjvkw0.png" alt="Always Trucking Logo" class="logo-img">
+                </a>
+                <h1>Always Trucking &amp; Loading LLC</h1>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="courses.html" class="nav-link">Courses</a>
+                </li>
+                <li class="nav-item">
+                    <a href="faq.html" class="nav-link">FAQ</a>
+                </li>
+                <li class="nav-item">
+                    <a href="employment.html" class="nav-link">Careers</a>
+                </li>
+                <li class="nav-item">
+                    <a href="login.html" class="nav-link active btn btn-outline">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a href="register.html" class="nav-link btn btn-primary">Register</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="auth-page">
+        <!-- Auth Image -->
+        <div class="auth-image">
+            <div class="auth-image-content">
+                <h2>Trucking Industry Training Excellence</h2>
+                <p>Access your professional training courses, track your progress, and earn industry-recognized certifications. Login to continue your learning journey.</p>
+                <div>
+                    <a href="index.html" class="btn btn-secondary">Visit Homepage</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Auth Form -->
+        <div class="auth-form-container">
+            <div class="auth-form-wrapper">
+                <div class="auth-logo">
+                    <img src="nvcqdjvkw0.png" alt="Always Trucking Logo" style="height: 50px; width: auto;">
+                    <h1>Always Trucking & Loading LLC</h1>
+                </div>
+                
+                <div class="auth-title">
+                    <h2>Welcome Back</h2>
+                    <p>Sign in to access your training dashboard</p>
+                </div>
+                
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" class="form-control" required placeholder="Enter your email">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" class="form-control" required placeholder="Enter your password">
+                    </div>
+                    
+                    <div class="form-footer">
+                        <div class="remember-me">
+                            <input type="checkbox" id="remember-me">
+                            <label for="remember-me">Remember me</label>
+                        </div>
+                        
+                        <a href="#" class="forgot-password">Forgot Password?</a>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                </form>
+                
+                <div class="divider">
+                    <span>or</span>
+                </div>
+                
+                <div class="social-login">
+                    <button class="social-btn" disabled>
+                        <i class="fab fa-google"></i> Google
+                    </button>
+                    
+                    <button class="social-btn" disabled>
+                        <i class="fab fa-microsoft"></i> Microsoft
+                    </button>
+                </div>
+                
+                <div class="auth-footer">
+                    <p>Don't have an account? <a href="register.html">Create an Account</a></p>
+                </div>
+                
+                <div id="login-error" class="invalid-feedback" style="display: none; text-align: center; margin-top: 1rem;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/auth.js"></script>
+    <script src="js/agent-faq.js"></script>
+    <script src="js/agent-lee.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is already logged in
+            if (isLoggedIn()) {
+                window.location.href = 'dashboard.html';
+            }
+            
+            // Login form submission
+            const loginForm = document.getElementById('login-form');
+            const loginError = document.getElementById('login-error');
+            
+            loginForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                
+                // Reset error message
+                loginError.style.display = 'none';
+                
+                try {
+                    await loginUser(email, password);
+                    window.location.href = 'dashboard.html';
+                } catch (error) {
+                    loginError.textContent = error.message;
+                    loginError.style.display = 'block';
+                }
+            });
+            
+            // Forgot password link
+            const forgotPasswordLink = document.querySelector('.forgot-password');
+            forgotPasswordLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('Password reset functionality coming soon. Please contact support at training@alwaystrucking.com for assistance or call (414) 239-9333 or (414) 982-7034.');
+            });
+        });
+    </script>
+    
+    <footer style="background-color: #f8f9fa; padding: 1rem; text-align: center; margin-top: 2rem; font-size: 0.9rem; color: #6c757d;">
+        <p>Always Trucking & Loading LLC is an equal opportunity employer | Milwaukee, Wisconsin | (414) 239-9333 | (414) 982-7034</p>
+        <p>© 2025 Always Trucking & Loading LLC. All rights reserved.</p>
+    </footer>
+</body>
+</html>

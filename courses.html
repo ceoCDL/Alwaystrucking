@@ -1,0 +1,726 @@
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>All Courses | Always Trucking &amp; Loading LLC</title>
+<meta name="description" content="Browse all training courses from Always Trucking &amp; Loading LLC - CDL, dispatcher, safety, and compliance training">
+<!-- External Fonts --><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&amp;family=Roboto:wght@300;400;500&amp;display=swap" rel="stylesheet">
+<!-- Font Awesome Icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<!-- Local Styles --><link rel="stylesheet" href="css/styles.css">
+<!-- Agent Lee Scripts -->
+<script src="js/agent-faq.js"></script>
+<script src="js/agent-lee.js"></script>
+<style>
+        /* Course catalog specific styles */
+        .course-catalog-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #004a8c 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .course-catalog-header h1 {
+            color: white;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .course-catalog-header p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+        }
+        
+        .course-filters {
+            padding: 2rem 0;
+            background-color: #f8f9fa;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 0.5rem 1.5rem;
+            border: 2px solid var(--primary-color);
+            background-color: white;
+            color: var(--primary-color);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+        
+        .filter-btn:hover,
+        .filter-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .course-catalog {
+            padding: 3rem 0;
+        }
+        
+        .course-card {
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        .course-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .course-card-image {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .course-card-image img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .course-card:hover .course-card-image img {
+            transform: scale(1.05);
+        }
+        
+        .course-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        
+        .course-difficulty {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background-color: rgba(255, 255, 255, 0.9);
+            color: var(--dark-color);
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .course-card-content {
+            padding: 2rem;
+        }
+        
+        .course-meta {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+            color: #6c757d;
+            font-size: 0.875rem;
+        }
+        
+        .course-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .course-meta i {
+            color: var(--primary-color);
+        }
+        
+        .course-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
+        
+        .course-card p {
+            color: #6c757d;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .course-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .course-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .course-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .stars {
+            color: #ffc107;
+        }
+        
+        .course-actions {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn-outline-primary {
+            background-color: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .course-catalog-header h1 {
+                font-size: 2rem;
+            }
+            
+            .course-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .filter-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .course-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand">
+                <a href="index.html">
+                    <img src="nvcqdjvkw0.png" alt="Always Trucking Logo" class="logo-img">
+                </a>
+                <h1>Always Trucking &amp; Loading LLC</h1>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="courses.html" class="nav-link active">Courses</a>
+                </li>
+                <li class="nav-item">
+                    <a href="faq.html" class="nav-link">FAQ</a>
+                </li>
+                <li class="nav-item">
+                    <a href="employment.html" class="nav-link">Careers</a>
+                </li>
+                <li class="nav-item">
+                    <a href="dashboard.html" class="nav-link" id="dashboard-link" style="display: none;">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a href="login.html" class="nav-link btn btn-outline" id="login-link">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a href="register.html" class="nav-link btn btn-primary" id="register-link">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" id="logout-button" class="nav-link btn btn-outline" style="display: none;">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Course Catalog Header -->
+    <section class="course-catalog-header" style="background-image: url('w8p4swctmj.png'); background-size: cover; background-position: center; position: relative;">
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7);"></div>
+        <div class="container" style="position: relative; z-index: 2;">
+            <img src="nvcqdjvkw0.png" alt="Always Trucking Logo" style="height: 80px; width: auto; margin-bottom: 1.5rem;">
+            <h1>Professional Training Courses</h1>
+            <p>Comprehensive CDL and dispatcher education designed for modern trucking professionals</p>
+        </div>
+    </section><!-- Course Filters --><section class="course-filters"><div class="container">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All Courses</button>
+                <button class="filter-btn" data-filter="cdl">CDL Training</button>
+                <button class="filter-btn" data-filter="dispatcher">Dispatcher</button>
+                <button class="filter-btn" data-filter="safety">Safety</button>
+                <button class="filter-btn" data-filter="compliance">Compliance</button>
+                <button class="filter-btn" data-filter="technology">Technology</button>
+            </div>
+        </div>
+    </section><!-- Course Catalog --><section class="course-catalog"><div class="container">
+            <div class="course-grid" id="course-grid">
+                <!-- Course cards will be dynamically loaded here -->
+                
+                <!-- CDL Continuing Education -->
+                <div class="course-card" data-category="cdl">
+                    <div class="course-card-image">
+                        <img src="te5995fzzs.png" alt="CDL Continuing Education"><div class="course-badge">Popular</div>
+                        <div class="course-difficulty">Intermediate</div>
+                    </div>
+                    <div class="course-card-content">
+                        <div class="course-meta">
+                            <span><i class="fas fa-clock"></i> 8 Hours</span>
+                            <span><i class="fas fa-book"></i> 8 Modules</span>
+                            <span><i class="fas fa-certificate"></i> Certificate</span>
+                        </div>
+                        <h3><img src="nvcqdjvkw0.png" alt="Always Trucking Logo" style="height: 20px; width: auto; margin-right: 8px; vertical-align: middle;"> CDL Continuing Education &amp; Refresher Course</h3>
+                        <p>Stay current with regulations, safety protocols, and industry best practices. Perfect for experienced drivers looking to maintain compliance and enhance their professional skills.</p>
+                        <div class="course-example" style="background-color: #f0f7ff; padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem; border-left: 4px solid var(--primary-color);">
+                            <h4 style="margin-bottom: 0.5rem; color: var(--primary-color); font-size: 0.9rem;">What You'll Learn:</h4>
+                            <ul style="margin: 0; padding-left: 1.5rem; font-size: 0.85rem; color: #6c757d;">
+                                <li>Updated federal and state regulations</li>
+                                <li>Advanced safety techniques and accident prevention</li>
+                                <li>Electronic logging device (ELD) compliance</li>
+                                <li>Vehicle inspection procedures</li>
+                            </ul>
+                        </div>
+                        <div class="course-stats">
+                            <div class="course-price">$99</div>
+                            <div class="course-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span>(4.9)</span>
+                            </div>
+                        </div>
+                        <div class="course-actions">
+                            <a href="course.html?id=1" class="btn btn-primary">Start Course</a>
+                            <button class="btn btn-outline-primary">Preview</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Dispatcher Training -->
+                <div class="course-card" data-category="dispatcher">
+                    <div class="course-card-image">
+                        <img src="qdfmbyz94h.png" alt="Dispatcher Training"><div class="course-badge">New</div>
+                        <div class="course-difficulty">Beginner</div>
+                    </div>
+                    <div class="course-card-content">
+                        <div class="course-meta">
+                            <span><i class="fas fa-clock"></i> 6 Hours</span>
+                            <span><i class="fas fa-book"></i> 6 Modules</span>
+                            <span><i class="fas fa-certificate"></i> Certificate</span>
+                        </div>
+                        <h3><img src="nvcqdjvkw0.png" alt="Always Trucking Logo" style="height: 20px; width: auto; margin-right: 8px; vertical-align: middle;"> Dispatcher Training &amp; Load Management</h3>
+                        <p>Master load planning, communication strategies, TMS software, and regulatory compliance essential for dispatch operations and logistics coordination.</p>
+                        <div class="course-example" style="background-color: #f0f7ff; padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem; border-left: 4px solid var(--primary-color);">
+                            <h4 style="margin-bottom: 0.5rem; color: var(--primary-color); font-size: 0.9rem;">What You'll Learn:</h4>
+                            <ul style="margin: 0; padding-left: 1.5rem; font-size: 0.85rem; color: #6c757d;">
+                                <li>Load planning and route optimization</li>
+                                <li>Driver communication and coordination</li>
+                                <li>Transportation Management Systems (TMS)</li>
+                                <li>DOT regulations and compliance</li>
+                            </ul>
+                        </div>
+                        <div class="course-stats">
+                            <div class="course-price">$79</div>
+                            <div class="course-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span>(4.8)</span>
+                            </div>
+                        </div>
+                        <div class="course-actions">
+                            <a href="course.html?id=2" class="btn btn-primary">Start Course</a>
+                            <button class="btn btn-outline-primary">Preview</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Hours of Service Compliance -->
+                <div class="course-card" data-category="compliance">
+                    <div class="course-card-image">
+                        <img src="jp9k2hb391.png" alt="Hours of Service Compliance"><div class="course-badge">Essential</div>
+                        <div class="course-difficulty">Intermediate</div>
+                    </div>
+                    <div class="course-card-content">
+                        <div class="course-meta">
+                            <span><i class="fas fa-clock"></i> 4 Hours</span>
+                            <span><i class="fas fa-book"></i> 4 Modules</span>
+                            <span><i class="fas fa-certificate"></i> Certificate</span>
+                        </div>
+                        <h3><img src="nvcqdjvkw0.png" alt="Always Trucking Logo" style="height: 20px; width: auto; margin-right: 8px; vertical-align: middle;"> Hours of Service &amp; Logbook Compliance</h3>
+                        <p>Comprehensive coverage of federal and state hours-of-service rules, ELD usage, and proper recordkeeping requirements for commercial drivers.</p>
+                        <div class="course-example" style="background-color: #f0f7ff; padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem; border-left: 4px solid var(--primary-color);">
+                            <h4 style="margin-bottom: 0.5rem; color: var(--primary-color); font-size: 0.9rem;">What You'll Learn:</h4>
+                            <ul style="margin: 0; padding-left: 1.5rem; font-size: 0.85rem; color: #6c757d;">
+                                <li>Federal Hours of Service regulations</li>
+                                <li>Electronic Log Device (ELD) operations</li>
+                                <li>Duty status changes and violations</li>
+                                <li>Record keeping and documentation</li>
+                            </ul>
+                        </div>
+                        <div class="course-stats">
+                            <div class="course-price">$59</div>
+                            <div class="course-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <span>(4.7)</span>
+                            </div>
+                        </div>
+                        <div class="course-actions">
+                            <a href="course.html?id=3" class="btn btn-primary">Start Course</a>
+                            <button class="btn btn-outline-primary">Preview</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Vehicle Inspection & Maintenance -->
+                <div class="course-card" data-category="safety">
+                    <div class="course-card-image">
+                        <img src="7edo5xh1do.png" alt="Vehicle Inspection"><div class="course-badge">Updated</div>
+                        <div class="course-difficulty">Intermediate</div>
+                    </div>
+                    <div class="course-card-content">
+                        <div class="course-meta">
+                            <span><i class="fas fa-clock"></i> 5 Hours</span>
+                            <span><i class="fas fa-book"></i> 5 Modules</span>
+                            <span><i class="fas fa-certificate"></i> Certificate</span>
+                        </div>
+                        <h3><img src="nvcqdjvkw0.png" alt="Always Trucking Logo" style="height: 20px; width: auto; margin-right: 8px; vertical-align: middle;"> Vehicle Inspection &amp; Preventative Maintenance</h3>
+                        <p>Learn comprehensive inspection procedures for pre-trip, en-route, and post-trip checks, plus essential maintenance and troubleshooting techniques.</p>
+                        <div class="course-example" style="background-color: #f0f7ff; padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem; border-left: 4px solid var(--primary-color);">
+                            <h4 style="margin-bottom: 0.5rem; color: var(--primary-color); font-size: 0.9rem;">What You'll Learn:</h4>
+                            <ul style="margin: 0; padding-left: 1.5rem; font-size: 0.85rem; color: #6c757d;">
+                                <li>Pre-trip inspection procedures</li>
+                                <li>En-route and post-trip inspections</li>
+                                <li>Common mechanical issues and solutions</li>
+                                <li>Documentation and reporting requirements</li>
+                            </ul>
+                        </div>
+                        <div class="course-stats">
+                            <div class="course-price">$69</div>
+                            <div class="course-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span>(4.9)</span>
+                            </div>
+                        </div>
+                        <div class="course-actions">
+                            <a href="course.html?id=4" class="btn btn-primary">Start Course</a>
+                            <button class="btn btn-outline-primary">Preview</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Defensive Driving -->
+                <div class="course-card" data-category="safety">
+                    <div class="course-card-image">
+                        <img src="w8p4swctmj.png" alt="Defensive Driving"><div class="course-badge">Recommended</div>
+                        <div class="course-difficulty">Beginner</div>
+                    </div>
+                    <div class="course-card-content">
+                        <div class="course-meta">
+                            <span><i class="fas fa-clock"></i> 6 Hours</span>
+                            <span><i class="fas fa-book"></i> 6 Modules</span>
+                            <span><i class="fas fa-certificate"></i> Certificate</span>
+                        </div>
+                        <h3><img src="nvcqdjvkw0.png" alt="Always Trucking Logo" style="height: 20px; width: auto; margin-right: 8px; vertical-align: middle;"> Defensive Driving &amp; Accident Prevention</h3>
+                        <p>Master safe driving techniques, hazard perception, risk assessment, and proven strategies to prevent accidents and traffic violations.</p>
+                        <div class="course-example" style="background-color: #f0f7ff; padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem; border-left: 4px solid var(--primary-color);">
+                            <h4 style="margin-bottom: 0.5rem; color: var(--primary-color); font-size: 0.9rem;">What You'll Learn:</h4>
+                            <ul style="margin: 0; padding-left: 1.5rem; font-size: 0.85rem; color: #6c757d;">
+                                <li>Hazard recognition and perception</li>
+                                <li>Following distance and space management</li>
+                                <li>Weather and road condition adjustments</li>
+                                <li>Emergency response procedures</li>
+                            </ul>
+                        </div>
+                        <div class="course-stats">
+                            <div class="course-price">$79</div>
+                            <div class="course-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <span>(4.6)</span>
+                            </div>
+                        </div>
+                        <div class="course-actions">
+                            <a href="course.html?id=5" class="btn btn-primary">Start Course</a>
+                            <button class="btn btn-outline-primary">Preview</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- TMS Training -->
+                <div class="course-card" data-category="technology">
+                    <div class="course-card-image">
+                        <img src="wgipseass2.png" alt="TMS Training"><div class="course-badge">Tech</div>
+                        <div class="course-difficulty">Advanced</div>
+                    </div>
+                    <div class="course-card-content">
+                        <div class="course-meta">
+                            <span><i class="fas fa-clock"></i> 7 Hours</span>
+                            <span><i class="fas fa-book"></i> 7 Modules</span>
+                            <span><i class="fas fa-certificate"></i> Certificate</span>
+                        </div>
+                        <h3><img src="nvcqdjvkw0.png" alt="Always Trucking Logo" style="height: 20px; width: auto; margin-right: 8px; vertical-align: middle;"> Transportation Management System (TMS) Training</h3>
+                        <p>Hands-on instruction for dispatchers and drivers on using modern TMS software for load management, tracking, and communication systems.</p>
+                        <div class="course-example" style="background-color: #f0f7ff; padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem; border-left: 4px solid var(--primary-color);">
+                            <h4 style="margin-bottom: 0.5rem; color: var(--primary-color); font-size: 0.9rem;">What You'll Learn:</h4>
+                            <ul style="margin: 0; padding-left: 1.5rem; font-size: 0.85rem; color: #6c757d;">
+                                <li>TMS software navigation and operation</li>
+                                <li>Load planning and dispatch coordination</li>
+                                <li>Driver communication tools</li>
+                                <li>Performance tracking and analytics</li>
+                            </ul>
+                        </div>
+                        <div class="course-stats">
+                            <div class="course-price">$89</div>
+                            <div class="course-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span>(4.8)</span>
+                            </div>
+                        </div>
+                        <div class="course-actions">
+                            <a href="course.html?id=6" class="btn btn-primary">Start Course</a>
+                            <button class="btn btn-outline-primary">Preview</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Customer Service -->
+                <div class="course-card" data-category="dispatcher">
+                    <div class="course-card-image">
+                        <img src="https://public.youware.com/users-website-assets/prod/87705be6-6621-4fdf-88c9-49587a2c3371/gf3b649f2bf648845f60c94114f9a2743f01f6863c524880aece9c39e055ca5c166c60290ee3ca99da29cccb8c2f89609662eb80590bccff0ffba5ae330184ce1_1280.jpg" alt="Customer Service"><div class="course-badge">Professional</div>
+                        <div class="course-difficulty">Beginner</div>
+                    </div>
+                    <div class="course-card-content">
+                        <div class="course-meta">
+                            <span><i class="fas fa-clock"></i> 5 Hours</span>
+                            <span><i class="fas fa-book"></i> 5 Modules</span>
+                            <span><i class="fas fa-certificate"></i> Certificate</span>
+                        </div>
+                        <h3><img src="nvcqdjvkw0.png" alt="Always Trucking Logo" style="height: 20px; width: auto; margin-right: 8px; vertical-align: middle;"> Customer Service &amp; Communication</h3>
+                        <p>Develop essential skills for professional interaction with customers, shippers, and receivers, including conflict resolution and effective communication.</p>
+                        <div class="course-example" style="background-color: #f0f7ff; padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem; border-left: 4px solid var(--primary-color);">
+                            <h4 style="margin-bottom: 0.5rem; color: var(--primary-color); font-size: 0.9rem;">What You'll Learn:</h4>
+                            <ul style="margin: 0; padding-left: 1.5rem; font-size: 0.85rem; color: #6c757d;">
+                                <li>Professional communication techniques</li>
+                                <li>Conflict resolution strategies</li>
+                                <li>Customer relationship management</li>
+                                <li>Cultural sensitivity and awareness</li>
+                            </ul>
+                        </div>
+                        <div class="course-stats">
+                            <div class="course-price">$69</div>
+                            <div class="course-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <span>(4.5)</span>
+                            </div>
+                        </div>
+                        <div class="course-actions">
+                            <a href="course.html?id=7" class="btn btn-primary">Start Course</a>
+                            <button class="btn btn-outline-primary">Preview</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Fleet Safety & Compliance -->
+                <div class="course-card" data-category="compliance">
+                    <div class="course-card-image">
+                        <img src="cnj525p5ch.png" alt="Fleet Safety"><div class="course-badge">Comprehensive</div>
+                        <div class="course-difficulty">Advanced</div>
+                    </div>
+                    <div class="course-card-content">
+                        <div class="course-meta">
+                            <span><i class="fas fa-clock"></i> 8 Hours</span>
+                            <span><i class="fas fa-book"></i> 8 Modules</span>
+                            <span><i class="fas fa-certificate"></i> Certificate</span>
+                        </div>
+                        <h3><img src="nvcqdjvkw0.png" alt="Always Trucking Logo" style="height: 20px; width: auto; margin-right: 8px; vertical-align: middle;"> Fleet Safety &amp; Compliance Overview</h3>
+                        <p>Comprehensive examination of fleet safety programs, DOT compliance requirements, drug and alcohol testing protocols, and safety management systems.</p>
+                        <div class="course-example" style="background-color: #f0f7ff; padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem; border-left: 4px solid var(--primary-color);">
+                            <h4 style="margin-bottom: 0.5rem; color: var(--primary-color); font-size: 0.9rem;">What You'll Learn:</h4>
+                            <ul style="margin: 0; padding-left: 1.5rem; font-size: 0.85rem; color: #6c757d;">
+                                <li>Fleet safety program development</li>
+                                <li>DOT compliance requirements</li>
+                                <li>Drug and alcohol testing protocols</li>
+                                <li>Safety management systems implementation</li>
+                            </ul>
+                        </div>
+                        <div class="course-stats">
+                            <div class="course-price">$99</div>
+                            <div class="course-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span>(4.9)</span>
+                            </div>
+                        </div>
+                        <div class="course-actions">
+                            <a href="course.html?id=8" class="btn btn-primary">Start Course</a>
+                            <button class="btn btn-outline-primary">Preview</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!-- Footer --><footer class="footer"><div class="container">
+            <div class="footer-grid">
+                <div>
+                    <img src="nvcqdjvkw0.png" alt="Always Trucking &amp; Loading LLC Logo" class="footer-logo" style="width: 120px; height: auto; margin-bottom: 1rem;">
+                    <h3>Always Trucking &amp; Loading LLC</h3>
+                    <p>Professional driver training and education for the modern trucking industry. Committed to safety, compliance, and excellence.</p>
+                    <p><strong>We are an equal opportunity employer.</strong></p>
+                </div>
+                
+                <div>
+                    <h3>Training Courses</h3>
+                    <ul class="footer-links">
+<li><a href="course.html?id=1">CDL Continuing Education</a></li>
+                        <li><a href="course.html?id=2">Dispatcher Training</a></li>
+                        <li><a href="course.html?id=3">Hours of Service Compliance</a></li>
+                        <li><a href="course.html?id=4">Vehicle Inspection</a></li>
+                        <li><a href="course.html?id=5">Defensive Driving</a></li>
+                    </ul>
+</div>
+                
+                <div>
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+<li><a href="index.html#about">About Us</a></li>
+                        <li><a href="index.html#contact">Contact Support</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">DSPS Compliance</a></li>
+                    </ul>
+</div>
+                
+                <div>
+                    <h3>Connect With Us</h3>
+                    <ul class="footer-links">
+                        <li><a href="mailto:training@alwaystrucking.com">training@alwaystrucking.com</a></li>
+                        <li><a href="tel:+14142399333">(414) 239-9333</a></li>
+                        <li><a href="tel:+14149827034">(414) 982-7034</a></li>
+                        <li><a href="#">Milwaukee, Wisconsin</a></li>
+                        <li><a href="employment.html">Employment Opportunities</a></li>
+                    </ul>
+</div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2025 Always Trucking &amp; Loading LLC. All rights reserved. | Training Hub Master Plan</p>
+                <p>Always double-check with DSPS for your specific situation.</p>
+            </div>
+        </div>
+    </footer><!-- JavaScript --><script src="js/auth.js"></script><script src="js/agent-faq.js"></script><script src="js/agent-lee.js"></script><script>
+        // Course filtering functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is logged in and update navigation
+            if (isLoggedIn()) {
+                document.getElementById('login-link').style.display = 'none';
+                document.getElementById('dashboard-link').style.display = 'block';
+                document.getElementById('logout-button').style.display = 'block';
+            }
+            
+            // Filter functionality
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const courseCards = document.querySelectorAll('.course-card');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Get filter value
+                    const filter = this.getAttribute('data-filter');
+                    
+                    // Show/hide course cards based on filter
+                    courseCards.forEach(card => {
+                        if (filter === 'all') {
+                            card.style.display = 'block';
+                        } else {
+                            const category = card.getAttribute('data-category');
+                            if (category === filter) {
+                                card.style.display = 'block';
+                            } else {
+                                card.style.display = 'none';
+                            }
+                        }
+                    });
+                });
+            });
+            
+            // Preview button functionality
+            const previewButtons = document.querySelectorAll('.btn-outline-primary');
+            previewButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    alert('Course preview coming soon! Click "Start Course" to access the full content.');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

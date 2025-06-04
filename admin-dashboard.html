@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Always Trucking & Loading LLC - Administrative Dashboard</title>
+    <meta name="description" content="Comprehensive administrative dashboard for Always Trucking & Loading LLC forms management, tracking, and automation">
+    
+    <!-- External Dependencies -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    
+    <!-- Local Styles -->
+    <link rel="stylesheet" href="css/dashboard-styles.css">
+    
+    <!-- EmailJS Configuration -->
+    <script type="text/javascript">
+        (function() {
+            // Replace with your EmailJS Public Key
+            emailjs.init({ publicKey: "YOUR_EMAILJS_PUBLIC_KEY" });
+        })();
+    </script>
+</head>
+<body>
+    <!-- LOGIN SECTION -->
+    <section id="login-section" class="login-container active-section">
+        <div class="login-card">
+            <div class="login-header">
+                <img src="nvcqdjvkw0.png" alt="Always Trucking & Loading LLC" class="login-logo">
+                <h1>Always Trucking & Loading LLC</h1>
+                <h2>Administrative Dashboard</h2>
+                <p>Staff Portal - Forms Management & Tracking</p>
+            </div>
+            
+            <form id="login-form" class="login-form">
+                <div class="form-group">
+                    <label for="username"><i class="fas fa-user"></i> Username</label>
+                    <input type="text" id="username" name="username" required placeholder="Enter your username">
+                </div>
+                
+                <div class="form-group">
+                    <label for="password"><i class="fas fa-lock"></i> Password</label>
+                    <input type="password" id="password" name="password" required placeholder="Enter your password">
+                </div>
+                
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+                
+                <div id="login-error" class="error-message"></div>
+            </form>
+            
+            <div class="demo-credentials">
+                <h4>Demo Credentials:</h4>
+                <p><strong>Admin:</strong> admin / admin123</p>
+                <p><strong>Dispatcher:</strong> dispatcher / dispatch123</p>
+                <p><strong>Driver:</strong> driver / driver123</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN DASHBOARD SECTION -->
+    <section id="dashboard-section" class="dashboard-container hidden-section">
+        <!-- Header -->
+        <header class="dashboard-header">
+            <div class="header-left">
+                <img src="nvcqdjvkw0.png" alt="Always Trucking & Loading LLC" class="header-logo">
+                <div class="header-info">
+                    <h1>Always Trucking & Loading LLC</h1>
+                    <span class="subtitle">Administrative Dashboard</span>
+                </div>
+            </div>
+            
+            <div class="header-right">
+                <div class="user-info">
+                    <div class="user-details">
+                        <span class="welcome-text">Welcome back,</span>
+                        <span id="logged-user" class="username">User</span>
+                        <span id="user-role" class="user-role">Role</span>
+                    </div>
+                    <button id="logout-btn" class="btn btn-outline">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="dashboard-nav">
+            <div class="nav-container">
+                <button class="nav-btn active" data-panel="forms-panel">
+                    <i class="fas fa-file-alt"></i> Forms Hub
+                </button>
+                <button class="nav-btn admin-dispatcher-only" data-panel="tracker-panel">
+                    <i class="fas fa-chart-line"></i> Submission Tracker
+                </button>
+                <button class="nav-btn admin-only" data-panel="analytics-panel">
+                    <i class="fas fa-analytics"></i> Advanced Analytics
+                </button>
+                <button class="nav-btn admin-only" data-panel="settings-panel">
+                    <i class="fas fa-cogs"></i> Settings
+                </button>
+            </div>
+        </nav>
+
+        <!-- Content Panels -->
+        <main class="dashboard-content">
+            <!-- Forms Panel -->
+            <div id="forms-panel" class="panel active-panel">
+                <div class="panel-header">
+                    <h2><i class="fas fa-file-alt"></i> Company Forms Hub</h2>
+                    <p>Access, fill out, and submit all company forms. Forms are automatically tracked and emailed to management.</p>
+                </div>
+                
+                <div class="forms-grid">
+                    <!-- Driver Forms Category -->
+                    <div class="form-category">
+                        <h3><i class="fas fa-id-badge"></i> Driver Operations</h3>
+                        <div class="form-cards">
+                            <div class="form-card" data-form="job-application">
+                                <div class="form-icon">
+                                    <i class="fas fa-user-plus"></i>
+                                </div>
+                                <h4>Job Application</h4>
+                                <p>New hire application form for driver positions</p>
+                                <div class="form-actions">
+                                    <button class="btn btn-primary" onclick="openForm('job-application')">
+                                        <i class="fas fa-edit"></i> Fill Out
+                                    </button>
+                                    <button class="btn btn-secondary" onclick="downloadForm('job-application')">
+                                        <i class="fas fa-download"></i> Download
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="form-card" data-form="daily-log">
+                                <div class="form-icon">
+                                    <i class="fas fa-calendar-day"></i>
+                                </div>
+                                <h4>Driver Daily Log</h4>
+                                <p>Daily activity and hours tracking log</p>
+                                <div class="form-actions">
+                                    <button class="btn btn-primary" onclick="openForm('daily-log')">
+                                        <i class="fas fa-edit"></i> Fill Out
+                                    </button>
+                                    <button class="btn btn-secondary" onclick="downloadForm('daily-log')">
+                                        <i class="fas fa-download"></i> Download
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="form-card" data-form="vehicle-inspection">
+                                <div class="form-icon">
+                                    <i class="fas fa-truck"></i>
+                                </div>
+                                <h4>Vehicle Inspection Report</h4>
+                                <p>Pre-trip and post-trip inspection checklist</p>
+                                <div class="form-actions">
+                                    <button class="btn btn-primary" onclick="openForm('vehicle-inspection')">
+                                        <i class="fas fa-edit"></i> Fill Out
+                                    </button>
+                                    <button class="btn btn-secondary" onclick="downloadForm('vehicle-inspection')">
+                                        <i class="fas fa-download"></i> Download
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dispatch Forms Category -->
+                    <div class="form-category admin-dispatcher-only">
+                        <h3><i class="fas fa-route"></i> Dispatch Operations</h3>
+                        <div class="form-cards">
+                            <div class="form-card" data-form="dispatch-sheet">
+                                <div class="form-icon">
+                                    <i class="fas fa-clipboard-list"></i>
+                                </div>
+                                <h4>Dispatch Sheet</h4>
+                                <p>Load assignment and routing information</p>
+                                <div class="form-actions">
+                                    <button class="btn btn-primary" onclick="openForm('dispatch-sheet')">
+                                        <i class="fas fa-edit"></i> Fill Out
+                                    </button>
+                                    <button class="btn btn-secondary" onclick="downloadForm('dispatch-sheet')">
+                                        <i class="fas fa-download"></i> Download
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="form-card" data-form="rate-confirmation">
+                                <div class="form-icon">
+                                    <i class="fas fa-file-contract"></i>
+                                </div>
+                                <h4>Rate Confirmation Sheet</h4>
+                                <p>Load rate and payment confirmation</p>
+                                <div class="form-actions">
+                                    <button class="btn btn-primary" onclick="openForm('rate-confirmation')">
+                                        <i class="fas fa-edit"></i> Fill Out
+                                    </button>
+                                    <button class="btn btn-secondary" onclick="downloadForm('rate-confirmation')">
+                                        <i class="fas fa-download"></i> Download
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Safety & Compliance Forms -->
+                    <div class="form-category">
+                        <h3><i class="fas fa-shield-alt"></i> Safety & Compliance</h3>
+                        <div class="form-cards">
+                            <div class="form-card" data-form="accident-report">
+                                <div class="form-icon">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                                <h4>Accident Report Form</h4>
+                                <p>Incident documentation and reporting</p>
+                                <div class="form-actions">
+                                    <button class="btn btn-primary" onclick="openForm('accident-report')">
+                                        <i class="fas fa-edit"></i> Fill Out
+                                    </button>
+                                    <button class="btn btn-secondary" onclick="downloadForm('accident-report')">
+                                        <i class="fas fa-download"></i> Download
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Documentation Forms -->
+                    <div class="form-category">
+                        <h3><i class="fas fa-file-invoice"></i> Documentation</h3>
+                        <div class="form-cards">
+                            <div class="form-card" data-form="bill-of-lading">
+                                <div class="form-icon">
+                                    <i class="fas fa-shipping-fast"></i>
+                                </div>
+                                <h4>Bill of Lading</h4>
+                                <p>Freight shipment documentation</p>
+                                <div class="form-actions">
+                                    <button class="btn btn-primary" onclick="openForm('bill-of-lading')">
+                                        <i class="fas fa-edit"></i> Fill Out
+                                    </button>
+                                    <button class="btn btn-secondary" onclick="downloadForm('bill-of-lading')">
+                                        <i class="fas fa-download"></i> Download
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="form-card" data-form="proof-of-delivery">
+                                <div class="form-icon">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <h4>Proof of Delivery</h4>
+                                <p>Delivery confirmation documentation</p>
+                                <div class="form-actions">
+                                    <button class="btn btn-primary" onclick="openForm('proof-of-delivery')">
+                                        <i class="fas fa-edit"></i> Fill Out
+                                    </button>
+                                    <button class="btn btn-secondary" onclick="downloadForm('proof-of-delivery')">
+                                        <i class="fas fa-download"></i> Download
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="form-card" data-form="freight-invoice">
+                                <div class="form-icon">
+                                    <i class="fas fa-receipt"></i>
+                                </div>
+                                <h4>Freight Invoice</h4>
+                                <p>Billing and payment documentation</p>
+                                <div class="form-actions">
+                                    <button class="btn btn-primary" onclick="openForm('freight-invoice')">
+                                        <i class="fas fa-edit"></i> Fill Out
+                                    </button>
+                                    <button class="btn btn-secondary" onclick="downloadForm('freight-invoice')">
+                                        <i class="fas fa-download"></i> Download
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="form-card" data-form="delivery-receipt">
+                                <div class="form-icon">
+                                    <i class="fas fa-clipboard-check"></i>
+                                </div>
+                                <h4>Delivery Receipt</h4>
+                                <p>TMS load summary and receipt</p>
+                                <div class="form-actions">
+                                    <button class="btn btn-primary" onclick="openForm('delivery-receipt')">
+                                        <i class="fas fa-edit"></i> Fill Out
+                                    </button>
+                                    <button class="btn btn-secondary" onclick="downloadForm('delivery-receipt')">
+                                        <i class="fas fa-download"></i> Download
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tracker Panel -->
+            <div id="tracker-panel" class="panel hidden-panel admin-dispatcher-only">
+                <div class="panel-header">
+                    <h2><i class="fas fa-chart-line"></i> Submission Tracker</h2>
+                    <p>Monitor form submissions, track completion rates, and view detailed analytics.</p>
+                </div>
+                
+                <div class="tracker-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-number" id="total-submissions">0</span>
+                            <span class="stat-label">Total Submissions</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-calendar-day"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-number" id="today-submissions">0</span>
+                            <span class="stat-label">Today's Submissions</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-number" id="pending-submissions">0</span>
+                            <span class="stat-label">Pending Review</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-number" id="completion-rate">0%</span>
+                            <span class="stat-label">Completion Rate</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="charts-section">
+                    <div class="chart-container">
+                        <h3>Submissions by Form Type</h3>
+                        <canvas id="form-types-chart"></canvas>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <h3>Submissions Over Time (Last 7 Days)</h3>
+                        <canvas id="timeline-chart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="submissions-table-container">
+                    <h3>Recent Submissions</h3>
+                    <div class="table-controls">
+                        <input type="text" id="search-submissions" placeholder="Search submissions..." class="search-input">
+                        <select id="filter-form-type" class="filter-select">
+                            <option value="">All Form Types</option>
+                        </select>
+                        <select id="filter-status" class="filter-select">
+                            <option value="">All Statuses</option>
+                            <option value="completed">Completed</option>
+                            <option value="pending">Pending</option>
+                            <option value="draft">Draft</option>
+                        </select>
+                    </div>
+                    
+                    <div class="table-wrapper">
+                        <table id="submissions-table" class="submissions-table">
+                            <thead>
+                                <tr>
+                                    <th>Date/Time</th>
+                                    <th>Form Type</th>
+                                    <th>User</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Dynamic content -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="admin-controls admin-only">
+                    <button id="export-data" class="btn btn-secondary">
+                        <i class="fas fa-download"></i> Export Data
+                    </button>
+                    <button id="clear-all-data" class="btn btn-danger">
+                        <i class="fas fa-trash"></i> Clear All Data
+                    </button>
+                </div>
+            </div>
+
+            <!-- Analytics Panel -->
+            <div id="analytics-panel" class="panel hidden-panel admin-only">
+                <div class="panel-header">
+                    <h2><i class="fas fa-analytics"></i> Advanced Analytics</h2>
+                    <p>Detailed insights and performance metrics for form usage and completion rates.</p>
+                </div>
+                
+                <div class="analytics-content">
+                    <div class="analytics-grid">
+                        <div class="analytics-card">
+                            <h3>User Performance</h3>
+                            <canvas id="user-performance-chart"></canvas>
+                        </div>
+                        
+                        <div class="analytics-card">
+                            <h3>Form Completion Trends</h3>
+                            <canvas id="trends-chart"></canvas>
+                        </div>
+                        
+                        <div class="analytics-card">
+                            <h3>Department Usage</h3>
+                            <canvas id="department-chart"></canvas>
+                        </div>
+                        
+                        <div class="analytics-card">
+                            <h3>Monthly Overview</h3>
+                            <canvas id="monthly-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Panel -->
+            <div id="settings-panel" class="panel hidden-panel admin-only">
+                <div class="panel-header">
+                    <h2><i class="fas fa-cogs"></i> System Settings</h2>
+                    <p>Configure system preferences, email settings, and user management.</p>
+                </div>
+                
+                <div class="settings-content">
+                    <div class="settings-section">
+                        <h3>Email Configuration</h3>
+                        <div class="setting-item">
+                            <label for="email-service">EmailJS Service ID</label>
+                            <input type="text" id="email-service" placeholder="service_xxxxxxx">
+                        </div>
+                        <div class="setting-item">
+                            <label for="email-template">EmailJS Template ID</label>
+                            <input type="text" id="email-template" placeholder="template_xxxxxxx">
+                        </div>
+                        <div class="setting-item">
+                            <label for="admin-email">Admin Email</label>
+                            <input type="email" id="admin-email" placeholder="admin@alwaystrucking.com">
+                        </div>
+                    </div>
+                    
+                    <div class="settings-section">
+                        <h3>System Preferences</h3>
+                        <div class="setting-item">
+                            <label>
+                                <input type="checkbox" id="auto-save"> Auto-save form drafts
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <label>
+                                <input type="checkbox" id="email-notifications"> Email notifications for new submissions
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <label>
+                                <input type="checkbox" id="data-backup"> Automatic data backup
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-actions">
+                        <button class="btn btn-primary" onclick="saveSettings()">
+                            <i class="fas fa-save"></i> Save Settings
+                        </button>
+                        <button class="btn btn-secondary" onclick="resetSettings()">
+                            <i class="fas fa-undo"></i> Reset to Defaults
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </section>
+
+    <!-- Form Modal -->
+    <div id="form-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Form Title</h3>
+                <button class="modal-close" onclick="closeFormModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <!-- Dynamic form content -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="loading-spinner">
+            <i class="fas fa-truck fa-spin"></i>
+            <p>Processing...</p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/dashboard.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/forms.js"></script>
+    <script src="js/tracking.js"></script>
+    <script src="js/charts.js"></script>
+</body>
+</html>

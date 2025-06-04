@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Employment Application - Always Trucking &amp; Loading LLC</title>
+<meta name="description" content="Apply for a position with Always Trucking & Loading LLC. We're an equal opportunity employer looking for talented individuals to join our team.">
+<!-- External Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<!-- Font Awesome Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<!-- Local Styles -->
+<link rel="stylesheet" href="css/styles.css">
+<!-- Agent Lee Scripts -->
+<script src="js/agent-faq.js"></script>
+<script src="js/agent-lee.js"></script>
+<style>
+    /* Application Form Specific Styles */
+    .application-form {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background: white;
+        border-radius: 1rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .form-section {
+        margin-bottom: 2rem;
+        padding-bottom: 2rem;
+        border-bottom: 1px solid #eee;
+    }
+    
+    .form-section:last-child {
+        border-bottom: none;
+    }
+    
+    .form-section h3 {
+        margin-bottom: 1.5rem;
+        color: var(--primary-color);
+        font-size: 1.5rem;
+    }
+    
+    .form-row {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .checkbox-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        margin-top: 1rem;
+    }
+    
+    .checkbox-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.5rem;
+    }
+    
+    .checkbox-item input[type="checkbox"] {
+        margin-right: 0.5rem;
+    }
+    
+    textarea {
+        width: 100%;
+        min-height: 150px;
+        padding: 0.75rem;
+        border: 1px solid #ced4da;
+        border-radius: 0.25rem;
+        font-family: inherit;
+    }
+    
+    .required-field::after {
+        content: " *";
+        color: var(--danger-color);
+    }
+    
+    .file-upload {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .file-upload label {
+        margin-bottom: 0.5rem;
+    }
+    
+    .note {
+        font-size: 0.9rem;
+        color: #6c757d;
+        font-style: italic;
+        margin-top: 0.5rem;
+    }
+    
+    /* Logo Animation Styles */
+    @keyframes logoSpin {
+        0% { transform: rotateY(0deg); }
+        100% { transform: rotateY(360deg); }
+    }
+    
+    @keyframes logoPulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+    
+    @keyframes logoGlow {
+        0% { filter: drop-shadow(0 0 3px rgba(255, 119, 0, 0.7)); }
+        50% { filter: drop-shadow(0 0 10px rgba(255, 119, 0, 0.9)); }
+        100% { filter: drop-shadow(0 0 3px rgba(255, 119, 0, 0.7)); }
+    }
+    
+    .logo-img {
+        height: 60px;
+        width: auto;
+        margin-right: 1rem;
+        transition: all 0.5s ease;
+        filter: drop-shadow(0 0 3px rgba(255, 119, 0, 0.7));
+    }
+    
+    .logo-img:hover {
+        animation: logoSpin 1s ease-in-out, logoGlow 2s infinite;
+    }
+    
+    /* Equal Opportunity Statement */
+    .equal-opportunity {
+        background-color: #f0f7ff;
+        padding: 1.5rem;
+        border-radius: 0.5rem;
+        margin-bottom: 2rem;
+        text-align: center;
+        border-left: 4px solid var(--primary-color);
+    }
+</style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand">
+                <a href="index.html">
+                    <img src="nvcqdjvkw0.png" alt="Always Trucking Logo" class="logo-img">
+                </a>
+                <h1>Always Trucking & Loading LLC</h1>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="courses.html" class="nav-link">Courses</a>
+                </li>
+                <li class="nav-item">
+                    <a href="faq.html" class="nav-link">FAQ</a>
+                </li>
+                <li class="nav-item">
+                    <a href="employment.html" class="nav-link active">Careers</a>
+                </li>
+                <li class="nav-item">
+                    <a href="login.html" class="nav-link btn btn-outline">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a href="register.html" class="nav-link btn btn-primary">Register</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="hero" style="padding: 4rem 0;">
+        <div class="container" style="text-align: center;">
+            <img src="nvcqdjvkw0.png" alt="Always Trucking Logo" style="height: 80px; width: auto; margin-bottom: 1.5rem;">
+            <h1>Employment Application</h1>
+            <p>Join our team of professional drivers and staff at Always Trucking & Loading LLC</p>
+            <p><strong>Location:</strong> Milwaukee, Wisconsin | <strong>Phone:</strong> (414) 239-9333 | (414) 982-7034</p>
+        </div>
+    </section>
+
+    <!-- Application Form Section -->
+    <section style="padding: 4rem 0; background-color: #f8f9fa;">
+        <div class="container">
+            <div class="equal-opportunity">
+                <h3 style="margin-bottom: 0.5rem;">Equal Opportunity Employer</h3>
+                <p style="margin-bottom: 0;">Always Trucking & Loading LLC is an equal opportunity employer. All qualified applicants will receive consideration for employment without regard to race, color, religion, sex, sexual orientation, gender identity, national origin, disability status, or any other characteristic protected by law.</p>
+            </div>
+            
+            <div class="application-form">
+                <form id="employment-application" action="#" method="POST">
+                    <!-- Personal Information Section -->
+                    <div class="form-section">
+                        <h3>Personal Information</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName" class="required-field">First Name</label>
+                                <input type="text" id="firstName" name="firstName" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName" class="required-field">Last Name</label>
+                                <input type="text" id="lastName" name="lastName" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email" class="required-field">Email Address</label>
+                                <input type="email" id="email" name="email" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone" class="required-field">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="address" class="required-field">Street Address</label>
+                                <input type="text" id="address" name="address" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="city" class="required-field">City</label>
+                                <input type="text" id="city" name="city" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="state" class="required-field">State</label>
+                                <input type="text" id="state" name="state" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="zipCode" class="required-field">ZIP Code</label>
+                                <input type="text" id="zipCode" name="zipCode" class="form-control" required>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Position Information Section -->
+                    <div class="form-section">
+                        <h3>Position Information</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="position" class="required-field">Position Applying For</label>
+                                <select id="position" name="position" class="form-control" required>
+                                    <option value="" selected disabled>Select a position</option>
+                                    <option value="CDL Driver">CDL Driver</option>
+                                    <option value="Dispatcher">Dispatcher</option>
+                                    <option value="Trainer">Trainer</option>
+                                    <option value="Mechanic">Mechanic</option>
+                                    <option value="Administrative">Administrative Staff</option>
+                                    <option value="Customer Service">Customer Service</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="otherPosition">If Other, please specify</label>
+                                <input type="text" id="otherPosition" name="otherPosition" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="availability" class="required-field">Availability</label>
+                                <select id="availability" name="availability" class="form-control" required>
+                                    <option value="" selected disabled>Select availability</option>
+                                    <option value="Full-time">Full-time</option>
+                                    <option value="Part-time">Part-time</option>
+                                    <option value="Contract">Contract</option>
+                                    <option value="Temporary">Temporary</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="startDate" class="required-field">Earliest Start Date</label>
+                                <input type="date" id="startDate" name="startDate" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="salary">Desired Salary/Rate</label>
+                                <input type="text" id="salary" name="salary" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="referral">How did you hear about us?</label>
+                                <select id="referral" name="referral" class="form-control">
+                                    <option value="" selected disabled>Select an option</option>
+                                    <option value="Website">Company Website</option>
+                                    <option value="Job Board">Job Board</option>
+                                    <option value="Social Media">Social Media</option>
+                                    <option value="Employee Referral">Employee Referral</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Driver-Specific Information (Conditional) -->
+                    <div class="form-section" id="driverSection" style="display: none;">
+                        <h3>Driver Information</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="licenseType" class="required-field">CDL License Type</label>
+                                <select id="licenseType" name="licenseType" class="form-control">
+                                    <option value="" selected disabled>Select license type</option>
+                                    <option value="Class A">Class A</option>
+                                    <option value="Class B">Class B</option>
+                                    <option value="Class C">Class C</option>
+                                    <option value="None">None</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="licenseState">License State</label>
+                                <input type="text" id="licenseState" name="licenseState" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="licenseNumber">License Number</label>
+                                <input type="text" id="licenseNumber" name="licenseNumber" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="licenseExpiration">License Expiration Date</label>
+                                <input type="date" id="licenseExpiration" name="licenseExpiration" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Endorsements (Check all that apply)</label>
+                                <div class="checkbox-group">
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="hazmat" name="endorsements[]" value="Hazmat">
+                                        <label for="hazmat">Hazmat (H)</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="tanker" name="endorsements[]" value="Tanker">
+                                        <label for="tanker">Tanker (N)</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="doubles" name="endorsements[]" value="Doubles/Triples">
+                                        <label for="doubles">Doubles/Triples (T)</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="passenger" name="endorsements[]" value="Passenger">
+                                        <label for="passenger">Passenger (P)</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="drivingExperience">Years of Commercial Driving Experience</label>
+                                <input type="number" id="drivingExperience" name="drivingExperience" min="0" max="50" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Work Experience Section -->
+                    <div class="form-section">
+                        <h3>Work Experience</h3>
+                        <p class="note">Please list your most recent work experience first.</p>
+                        
+                        <!-- Current/Most Recent Position -->
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="employer1">Current/Most Recent Employer</label>
+                                <input type="text" id="employer1" name="employer1" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="jobTitle1">Job Title</label>
+                                <input type="text" id="jobTitle1" name="jobTitle1" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="startDate1">Start Date</label>
+                                <input type="date" id="startDate1" name="startDate1" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="endDate1">End Date</label>
+                                <input type="date" id="endDate1" name="endDate1" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="responsibilities1">Responsibilities</label>
+                                <textarea id="responsibilities1" name="responsibilities1" class="form-control"></textarea>
+                            </div>
+                        </div>
+                        
+                        <!-- Add more experience button -->
+                        <div style="margin-top: 1rem; text-align: center;">
+                            <button type="button" id="addExperience" class="btn btn-outline-primary">
+                                <i class="fas fa-plus"></i> Add Another Work Experience
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Education Section -->
+                    <div class="form-section">
+                        <h3>Education</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="highestEducation">Highest Level of Education</label>
+                                <select id="highestEducation" name="highestEducation" class="form-control">
+                                    <option value="" selected disabled>Select education level</option>
+                                    <option value="High School">High School Diploma or GED</option>
+                                    <option value="Some College">Some College</option>
+                                    <option value="Associate">Associate Degree</option>
+                                    <option value="Bachelor">Bachelor's Degree</option>
+                                    <option value="Master">Master's Degree</option>
+                                    <option value="Doctorate">Doctorate</option>
+                                    <option value="Trade School">Trade School</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="school">School/Institution Name</label>
+                                <input type="text" id="school" name="school" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="certifications">Relevant Certifications or Training</label>
+                                <textarea id="certifications" name="certifications" class="form-control" placeholder="List any relevant certifications, training programs, or special skills"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- References Section -->
+                    <div class="form-section">
+                        <h3>Professional References</h3>
+                        <p class="note">Please provide at least two professional references.</p>
+                        
+                        <!-- Reference 1 -->
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="refName1">Reference Name</label>
+                                <input type="text" id="refName1" name="refName1" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="refRelation1">Relationship</label>
+                                <input type="text" id="refRelation1" name="refRelation1" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="refEmail1">Email</label>
+                                <input type="email" id="refEmail1" name="refEmail1" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="refPhone1">Phone</label>
+                                <input type="tel" id="refPhone1" name="refPhone1" class="form-control">
+                            </div>
+                        </div>
+                        
+                        <!-- Reference 2 -->
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="refName2">Reference Name</label>
+                                <input type="text" id="refName2" name="refName2" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="refRelation2">Relationship</label>
+                                <input type="text" id="refRelation2" name="refRelation2" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="refEmail2">Email</label>
+                                <input type="email" id="refEmail2" name="refEmail2" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="refPhone2">Phone</label>
+                                <input type="tel" id="refPhone2" name="refPhone2" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Additional Information Section -->
+                    <div class="form-section">
+                        <h3>Additional Information</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="additionalInfo">Additional Information</label>
+                                <textarea id="additionalInfo" name="additionalInfo" class="form-control" placeholder="Please include any additional information that might be helpful in considering your application"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group file-upload">
+                                <label for="resume">Upload Resume (PDF or Word)</label>
+                                <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx">
+                                <p class="note">Maximum file size: 5MB</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Legal Declarations Section -->
+                    <div class="form-section">
+                        <h3>Legal Declarations</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="legalToWork" name="legalToWork" required>
+                                    <label for="legalToWork" class="required-field">I am legally eligible to work in the United States.</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="truthfulInfo" name="truthfulInfo" required>
+                                    <label for="truthfulInfo" class="required-field">I certify that all information provided in this application is true and complete to the best of my knowledge.</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="backgroundCheck" name="backgroundCheck" required>
+                                    <label for="backgroundCheck" class="required-field">I understand that employment may be contingent upon passing a background check and/or drug test.</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Submit Button -->
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <button type="submit" class="btn btn-primary" style="padding: 1rem 3rem; font-size: 1.25rem;">Submit Application</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <img src="nvcqdjvkw0.png" alt="Always Trucking & Loading LLC Logo" class="footer-logo">
+                    <h3>Always Trucking &amp; Loading LLC</h3>
+                    <p>Professional driver training and education for the modern trucking industry. Committed to safety, compliance, and excellence since 2018.</p>
+                    <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
+                        <a href="#" style="color: white; font-size: 1.5rem;"><i class="fab fa-facebook"></i></a>
+                        <a href="#" style="color: white; font-size: 1.5rem;"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" style="color: white; font-size: 1.5rem;"><i class="fab fa-youtube"></i></a>
+                        <a href="#" style="color: white; font-size: 1.5rem;"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3>Training Courses</h3>
+                    <ul class="footer-links">
+                        <li><a href="courses.html">CDL Continuing Education</a></li>
+                        <li><a href="courses.html">Dispatcher Training</a></li>
+                        <li><a href="courses.html">Hours of Service Compliance</a></li>
+                        <li><a href="courses.html">Vehicle Inspection</a></li>
+                        <li><a href="courses.html">Defensive Driving</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="index.html#contact">Contact Support</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">FMCSA Compliance</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3>Connect With Us</h3>
+                    <ul class="footer-links">
+                        <li><a href="mailto:training@alwaystrucking.com">training@alwaystrucking.com</a></li>
+                        <li><a href="tel:+14142399333">(414) 239-9333</a></li>
+                        <li><a href="tel:+14149827034">(414) 982-7034</a></li>
+                        <li>Milwaukee, Wisconsin</li>
+                        <li><a href="tel:+14142399333">(414) 239-9333</a></li>
+                        <li><a href="#">Milwaukee, Wisconsin</a></li>
+                        <li><a href="employment.html">Employment Opportunities</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2025 Always Trucking &amp; Loading LLC. All rights reserved. | Equal Opportunity Employer</p>
+                <p>Located in Milwaukee, Wisconsin</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Toggle driver-specific fields based on position selection
+        document.getElementById('position').addEventListener('change', function() {
+            const driverSection = document.getElementById('driverSection');
+            if (this.value === 'CDL Driver') {
+                driverSection.style.display = 'block';
+            } else {
+                driverSection.style.display = 'none';
+            }
+        });
+        
+        // Add more work experience fields functionality
+        let experienceCount = 1;
+        
+        document.getElementById('addExperience').addEventListener('click', function() {
+            experienceCount++;
+            
+            // Create new work experience fields
+            const newExperienceHTML = `
+                <hr style="margin: 2rem 0;">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="employer${experienceCount}">Previous Employer</label>
+                        <input type="text" id="employer${experienceCount}" name="employer${experienceCount}" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="jobTitle${experienceCount}">Job Title</label>
+                        <input type="text" id="jobTitle${experienceCount}" name="jobTitle${experienceCount}" class="form-control">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="startDate${experienceCount}">Start Date</label>
+                        <input type="date" id="startDate${experienceCount}" name="startDate${experienceCount}" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="endDate${experienceCount}">End Date</label>
+                        <input type="date" id="endDate${experienceCount}" name="endDate${experienceCount}" class="form-control">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="responsibilities${experienceCount}">Responsibilities</label>
+                        <textarea id="responsibilities${experienceCount}" name="responsibilities${experienceCount}" class="form-control"></textarea>
+                    </div>
+                </div>
+            `;
+            
+            // Insert the new fields before the "Add More" button
+            this.parentNode.insertAdjacentHTML('beforebegin', newExperienceHTML);
+            
+            // Limit to 3 experiences
+            if (experienceCount >= 3) {
+                this.style.display = 'none';
+            }
+        });
+        
+        // Form submission handler
+        document.getElementById('employment-application').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Here you would normally send the form data to your server
+            // For now, we'll just show a success message
+            
+            alert('Thank you for submitting your application! We will review your information and contact you soon.');
+            
+            // Optionally reset the form
+            this.reset();
+            
+            // Redirect to homepage after a delay
+            setTimeout(function() {
+                window.location.href = 'index.html';
+            }, 2000);
+        });
+    </script>
+</body>
+</html>

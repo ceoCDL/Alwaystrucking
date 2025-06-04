@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard | Always Trucking & Loading LLC</title>
+    <meta name="description" content="Student dashboard for Always Trucking & Loading LLC training courses">
+    
+    <!-- External Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Local Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Agent Lee Scripts -->
+    <script src="js/agent-faq.js"></script>
+    <script src="js/agent-lee.js"></script>
+    
+    <style>
+        /* Dashboard specific styles */
+        .dashboard-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 2rem 0;
+        }
+        
+        .dashboard-header h1 {
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+        
+        .dashboard-header p {
+            margin-bottom: 0;
+            opacity: 0.9;
+        }
+        
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: var(--box-shadow);
+            text-align: center;
+        }
+        
+        .stat-card i {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .stat-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-card p {
+            color: #6c757d;
+            margin-bottom: 0;
+        }
+        
+        .dashboard-actions {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .dashboard-actions .btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand">
+                <a href="index.html">
+                    <img src="nvcqdjvkw0.png" alt="Always Trucking Logo" class="logo-img">
+                </a>
+                <h1>Always Trucking &amp; Loading LLC</h1>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="courses.html" class="nav-link">Courses</a>
+                </li>
+                <li class="nav-item">
+                    <a href="faq.html" class="nav-link">FAQ</a>
+                </li>
+                <li class="nav-item">
+                    <a href="dashboard.html" class="nav-link active">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" id="logout-button" class="nav-link btn btn-outline">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- Dashboard Header -->
+    <section class="dashboard-header" style="background: linear-gradient(135deg, var(--primary-color) 0%, #004a8c 100%);">
+        <div class="container" style="text-align: center;">
+            <img src="nvcqdjvkw0.png" alt="Always Trucking Logo" style="height: 60px; width: auto; margin-bottom: 1rem;">
+            <h1 id="user-welcome">Welcome back, Driver</h1>
+            <p>Continue your training or start a new course below</p>
+        </div>
+    </section>
+
+    <!-- Dashboard Content -->
+    <section style="padding: 2rem 0;">
+        <div class="container">
+            <!-- Dashboard Stats -->
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <i class="fas fa-book-open"></i>
+                    <h3>8</h3>
+                    <p>Available Courses</p>
+                </div>
+                
+                <div class="stat-card">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h3 id="completed-courses">0</h3>
+                    <p>Completed Courses</p>
+                </div>
+                
+                <div class="stat-card">
+                    <i class="fas fa-spinner"></i>
+                    <h3 id="in-progress-courses">0</h3>
+                    <p>In Progress</p>
+                </div>
+                
+                <div class="stat-card">
+                    <i class="fas fa-certificate"></i>
+                    <h3 id="certificates-earned">0</h3>
+                    <p>Certificates Earned</p>
+                </div>
+            </div>
+            
+            <!-- Dashboard Actions -->
+            <div class="dashboard-actions">
+                <button class="btn btn-primary">
+                    <i class="fas fa-download"></i>
+                    Download Offline Mode
+                </button>
+                
+                <button class="btn btn-secondary">
+                    <i class="fas fa-sync-alt"></i>
+                    Sync Progress
+                </button>
+            </div>
+            
+            <!-- Course Grid -->
+            <h2>Your Courses</h2>
+            <div id="course-grid" class="course-grid">
+                <!-- Course cards will be loaded here via JavaScript -->
+                <div class="card">
+                    <img src="images/g8ba2d307f143232b093ded7e55e1dc96509fb0dfcb66fdf69190d5f5abc569932a38eca480252667d9bc1c5779cf98b73d32317d510f527b8aee1db69d7950ed_1280.jpg" alt="CDL Continuing Education" class="card-img">
+                    <div class="card-body">
+                        <span class="course-status status-locked">Not Started</span>
+                        <h3 class="card-title">CDL Continuing Education & Refresher Course</h3>
+                        <p class="card-text">Helps experienced drivers stay current with regulations, safety, and industry best practices.</p>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 0%"></div>
+                        </div>
+                        <p class="progress-text">0% Complete</p>
+                        <div class="card-details">
+                            <span><i class="fas fa-book"></i> 8 Modules</span>
+                            <span><i class="fas fa-clock"></i> 8 hours</span>
+                        </div>
+                        <a href="course.html?id=1" class="btn btn-primary">Start Course</a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <img src="images/g7a2bae640c1282b789b5265b172b96a3e17d37e02763c8f9c2e89b5704588a5e77ec7533337fca4595c39f6f8837cb06aed2d31293b51c6e07f0a3ef193f3f82_1280.jpg" alt="Dispatcher Training" class="card-img">
+                    <div class="card-body">
+                        <span class="course-status status-locked">Not Started</span>
+                        <h3 class="card-title">Dispatcher Training & Load Management</h3>
+                        <p class="card-text">Teaches load planning, communication, TMS software, and regulatory compliance.</p>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 0%"></div>
+                        </div>
+                        <p class="progress-text">0% Complete</p>
+                        <div class="card-details">
+                            <span><i class="fas fa-book"></i> 6 Modules</span>
+                            <span><i class="fas fa-clock"></i> 6 hours</span>
+                        </div>
+                        <a href="course.html?id=2" class="btn btn-primary">Start Course</a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <img src="images/g8ba2d307f143232b093ded7e55e1dc96509fb0dfcb66fdf69190d5f5abc569932a38eca480252667d9bc1c5779cf98b73d32317d510f527b8aee1db69d7950ed_1280.jpg" alt="Hours of Service" class="card-img">
+                    <div class="card-body">
+                        <span class="course-status status-locked">Not Started</span>
+                        <h3 class="card-title">Hours of Service & Logbook Compliance</h3>
+                        <p class="card-text">Covers federal and state hours-of-service rules, ELD use, and proper recordkeeping.</p>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 0%"></div>
+                        </div>
+                        <p class="progress-text">0% Complete</p>
+                        <div class="card-details">
+                            <span><i class="fas fa-book"></i> 4 Modules</span>
+                            <span><i class="fas fa-clock"></i> 4 hours</span>
+                        </div>
+                        <a href="course.html?id=3" class="btn btn-primary">Start Course</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificates Section -->
+    <section id="certificates" style="padding: 2rem 0; background-color: var(--light-color);">
+        <div class="container">
+            <h2>Your Certificates</h2>
+            <p>Completed courses and earned certificates will appear here.</p>
+            
+            <div style="text-align: center; padding: 3rem 0;">
+                <i class="fas fa-certificate" style="font-size: 5rem; color: #ccc; margin-bottom: 1rem;"></i>
+                <h3>No Certificates Yet</h3>
+                <p>Complete a course to earn your first certificate</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h3>Always Trucking & Loading LLC</h3>
+                    <p>Professional driver training and education for the modern trucking industry. Committed to safety, compliance, and excellence.</p>
+                </div>
+                
+                <div>
+                    <h3>Training Courses</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">CDL Continuing Education</a></li>
+                        <li><a href="#">Dispatcher Training</a></li>
+                        <li><a href="#">Hours of Service Compliance</a></li>
+                        <li><a href="#">Vehicle Inspection</a></li>
+                        <li><a href="#">Defensive Driving</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Support Center</a></li>
+                        <li><a href="#">Contact Support</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">DSPS Compliance</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3>Connect With Us</h3>
+                    <ul class="footer-links">
+                        <li><a href="mailto:training@alwaystrucking.com">training@alwaystrucking.com</a></li>
+                        <li><a href="tel:+1-800-TRUCKING">1-800-TRUCKING</a></li>
+                        <li><a href="#">LinkedIn</a></li>
+                        <li><a href="#">Facebook</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Always Trucking & Loading LLC. All rights reserved. | Training Hub Master Plan</p>
+                <p>Always double-check with DSPS for your specific situation.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/auth.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/agent-faq.js"></script>
+    <script src="js/agent-lee.js"></script>
+</body>
+</html>

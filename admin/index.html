@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Always Trucking & Loading LLC</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <!-- Chart.js for analytics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- EmailJS for form submissions -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+</head>
+<body>
+    <!-- Login Screen (shown first) -->
+    <div id="login-container" class="login-container">
+        <div class="login-form">
+            <div class="login-logo">
+                <img src="../nvcqdjvkw0.png" alt="Always Trucking & Loading LLC" class="login-logo-img">
+                <h1>Administrative Dashboard</h1>
+            </div>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+                <div id="login-error" class="error-message"></div>
+                <div class="login-footer">
+                    <p>Always Trucking & Loading LLC &copy; 2025</p>
+                    <p>Equal Opportunity Employer | Milwaukee, WI</p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Main Dashboard (hidden initially) -->
+    <div id="dashboard-container" class="dashboard-container hidden">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="../nvcqdjvkw0.png" alt="Always Trucking & Loading LLC" class="sidebar-logo">
+                <h2>Admin Portal</h2>
+            </div>
+            
+            <div class="user-info">
+                <i class="fas fa-user-circle"></i>
+                <div>
+                    <span id="user-name">User Name</span>
+                    <span id="user-role" class="user-role">Role</span>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="nav-item active" data-panel="dashboard-panel">
+                        <i class="fas fa-tachometer-alt"></i> Dashboard
+                    </li>
+                    <li class="nav-item" data-panel="forms-panel">
+                        <i class="fas fa-file-alt"></i> Forms
+                    </li>
+                    <li class="nav-item admin-only" data-panel="submissions-panel">
+                        <i class="fas fa-chart-bar"></i> Submissions
+                    </li>
+                    <li class="nav-item admin-only" data-panel="settings-panel">
+                        <i class="fas fa-cog"></i> Settings
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <button id="logout-btn" class="btn btn-logout">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Panel -->
+            <section id="dashboard-panel" class="content-panel active">
+                <div class="panel-header">
+                    <h2><i class="fas fa-tachometer-alt"></i> Dashboard</h2>
+                    <p class="current-date" id="current-date"></p>
+                </div>
+                
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-file-alt"></i></div>
+                        <div class="stat-info">
+                            <h3>Total Forms</h3>
+                            <p id="total-forms-count">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-clipboard-check"></i></div>
+                        <div class="stat-info">
+                            <h3>Submissions</h3>
+                            <p id="total-submissions-count">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-truck"></i></div>
+                        <div class="stat-info">
+                            <h3>Active Drivers</h3>
+                            <p id="active-drivers-count">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-calendar-check"></i></div>
+                        <div class="stat-info">
+                            <h3>Today's Tasks</h3>
+                            <p id="todays-tasks-count">0</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="charts-container">
+                    <div class="chart-card">
+                        <h3>Submissions by Form Type</h3>
+                        <canvas id="submissions-by-type-chart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Recent Activity</h3>
+                        <canvas id="activity-chart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="recent-activity">
+                    <h3>Recent Submissions</h3>
+                    <div class="table-container">
+                        <table id="recent-submissions-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Form Type</th>
+                                    <th>Submitted By</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Will be populated via JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Forms Panel -->
+            <section id="forms-panel" class="content-panel">
+                <div class="panel-header">
+                    <h2><i class="fas fa-file-alt"></i> Forms</h2>
+                    <div class="search-container">
+                        <input type="text" id="form-search" placeholder="Search forms...">
+                        <button class="btn btn-search"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+                
+                <div class="forms-category">
+                    <h3>Driver Forms</h3>
+                    <div class="forms-grid">
+                        <div class="form-card" data-form="job-application">
+                            <div class="form-icon"><i class="fas fa-user-plus"></i></div>
+                            <div class="form-details">
+                                <h4>Job Application</h4>
+                                <p>Apply for a position at Always Trucking</p>
+                                <div class="form-actions">
+                                    <button class="btn btn-sm btn-primary view-form-btn">Open</button>
+                                    <button class="btn btn-sm btn-secondary download-form-btn">Download</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-card" data-form="driver-daily-log">
+                            <div class="form-icon"><i class="fas fa-calendar-day"></i></div>
+                            <div class="form-details">
+                                <h4>Driver Daily Log</h4>
+                                <p>Track driver hours and activities</p>
+                                <div class="form-actions">
+                                    <button class="btn btn-sm btn-primary view-form-btn">Open</button>
+                                    <button class="btn btn-sm btn-secondary download-form-btn">Download</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-card" data-form="vehicle-inspection">
+                            <div class="form-icon"><i class="fas fa-clipboard-list"></i></div>
+                            <div class="form-details">
+                                <h4>Vehicle Inspection Report</h4>
+                                <p>Complete pre/post trip vehicle inspections</p>
+                                <div class="form-actions">
+                                    <button class="btn btn-sm btn-primary view-form-btn">Open</button>
+                                    <button class="btn btn-sm btn-secondary download-form-btn">Download</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-card" data-form="accident-report">
+                            <div class="form-icon"><i class="fas fa-car-crash"></i></div>
+                            <div class="form-details">
+                                <h4>Accident Report</h4>
+                                <p>Document accident details and information</p>
+                                <div class="form-actions">
+                                    <button class="btn btn-sm btn-primary view-form-btn">Open</button>
+                                    <button class="btn btn-sm btn-secondary download-form-btn">Download</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="forms-category">
+                    <h3>Dispatch Forms</h3>
+                    <div class="forms-grid">
+                        <div class="form-card" data-form="dispatch-sheet">
+                            <div class="form-icon"><i class="fas fa-clipboard"></i></div>
+                            <div class="form-details">
+                                <h4>Dispatch Sheet</h4>
+                                <p>Assign loads and route information</p>
+                                <div class="form-actions">
+                                    <button class="btn btn-sm btn-primary view-form-btn">Open</button>
+                                    <button class="btn btn-sm btn-secondary download-form-btn">Download</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-card" data-form="rate-confirmation">
+                            <div class="form-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+                            <div class="form-details">
+                                <h4>Rate Confirmation</h4>
+                                <p>Document agreed rates for loads</p>
+                                <div class="form-actions">
+                                    <button class="btn btn-sm btn-primary view-form-btn">Open</button>
+                                    <button class="btn btn-sm btn-secondary download-form-btn">Download</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-card" data-form="bill-of-lading">
+                            <div class="form-icon"><i class="fas fa-file-contract"></i></div>
+                            <div class="form-details">
+                                <h4>Bill of Lading</h4>
+                                <p>Shipping document and receipt</p>
+                                <div class="form-actions">
+                                    <button class="btn btn-sm btn-primary view-form-btn">Open</button>
+                                    <button class="btn btn-sm btn-secondary download-form-btn">Download</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="forms-category">
+                    <h3>Delivery Forms</h3>
+                    <div class="forms-grid">
+                        <div class="form-card" data-form="proof-of-delivery">
+                            <div class="form-icon"><i class="fas fa-truck-loading"></i></div>
+                            <div class="form-details">
+                                <h4>Proof of Delivery</h4>
+                                <p>Confirm successful delivery of shipment</p>
+                                <div class="form-actions">
+                                    <button class="btn btn-sm btn-primary view-form-btn">Open</button>
+                                    <button class="btn btn-sm btn-secondary download-form-btn">Download</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-card" data-form="freight-invoice">
+                            <div class="form-icon"><i class="fas fa-file-invoice"></i></div>
+                            <div class="form-details">
+                                <h4>Freight Invoice</h4>
+                                <p>Billing document for freight services</p>
+                                <div class="form-actions">
+                                    <button class="btn btn-sm btn-primary view-form-btn">Open</button>
+                                    <button class="btn btn-sm btn-secondary download-form-btn">Download</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-card" data-form="delivery-receipt">
+                            <div class="form-icon"><i class="fas fa-receipt"></i></div>
+                            <div class="form-details">
+                                <h4>Delivery Receipt</h4>
+                                <p>Document confirming delivery completion</p>
+                                <div class="form-actions">
+                                    <button class="btn btn-sm btn-primary view-form-btn">Open</button>
+                                    <button class="btn btn-sm btn-secondary download-form-btn">Download</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Submissions Panel (Admin only) -->
+            <section id="submissions-panel" class="content-panel">
+                <div class="panel-header">
+                    <h2><i class="fas fa-chart-bar"></i> Submissions Tracker</h2>
+                    <div class="date-filter">
+                        <label for="date-range">Time Range:</label>
+                        <select id="date-range">
+                            <option value="7">Last 7 Days</option>
+                            <option value="30">Last 30 Days</option>
+                            <option value="90">Last 90 Days</option>
+                            <option value="all">All Time</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="charts-container">
+                    <div class="chart-card wide">
+                        <h3>Submissions Over Time</h3>
+                        <canvas id="submissions-time-chart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Submissions by User Role</h3>
+                        <canvas id="submissions-role-chart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Form Completion Rate</h3>
+                        <canvas id="completion-rate-chart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="submissions-list">
+                    <div class="list-header">
+                        <h3>All Submissions</h3>
+                        <div class="list-actions">
+                            <div class="search-container">
+                                <input type="text" id="submissions-search" placeholder="Search submissions...">
+                                <button class="btn btn-search"><i class="fas fa-search"></i></button>
+                            </div>
+                            <button class="btn btn-secondary" id="export-submissions">
+                                <i class="fas fa-file-export"></i> Export
+                            </button>
+                        </div>
+                    </div>
+                    <div class="table-container">
+                        <table id="all-submissions-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Date</th>
+                                    <th>Form Type</th>
+                                    <th>Submitted By</th>
+                                    <th>Role</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Will be populated via JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Settings Panel (Admin only) -->
+            <section id="settings-panel" class="content-panel">
+                <div class="panel-header">
+                    <h2><i class="fas fa-cog"></i> Settings</h2>
+                </div>
+                
+                <div class="settings-container">
+                    <div class="settings-card">
+                        <h3>Email Settings</h3>
+                        <form id="email-settings-form">
+                            <div class="form-group">
+                                <label for="email-service-id">EmailJS Service ID</label>
+                                <input type="text" id="email-service-id">
+                            </div>
+                            <div class="form-group">
+                                <label for="email-template-id">EmailJS Template ID</label>
+                                <input type="text" id="email-template-id">
+                            </div>
+                            <div class="form-group">
+                                <label for="email-user-id">EmailJS User ID</label>
+                                <input type="text" id="email-user-id">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Save Email Settings</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <div class="settings-card">
+                        <h3>User Management</h3>
+                        <div class="table-container">
+                            <table id="users-table">
+                                <thead>
+                                    <tr>
+                                        <th>Username</th>
+                                        <th>Full Name</th>
+                                        <th>Role</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Will be populated via JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <button class="btn btn-primary" id="add-user-btn">
+                            <i class="fas fa-user-plus"></i> Add User
+                        </button>
+                    </div>
+                    
+                    <div class="settings-card">
+                        <h3>Database Management</h3>
+                        <div class="db-actions">
+                            <button class="btn btn-secondary" id="export-db-btn">
+                                <i class="fas fa-download"></i> Export Database
+                            </button>
+                            <button class="btn btn-secondary" id="import-db-btn">
+                                <i class="fas fa-upload"></i> Import Database
+                            </button>
+                            <button class="btn btn-danger" id="clear-db-btn">
+                                <i class="fas fa-trash-alt"></i> Clear Database
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Form Viewer Modal -->
+    <div id="form-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Form Title</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body" id="form-container">
+                <!-- Form will be loaded here -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary close-modal-btn">Close</button>
+                <button class="btn btn-primary" id="submit-form-btn">Submit Form</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add User Modal -->
+    <div id="add-user-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add New User</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="add-user-form">
+                    <div class="form-group">
+                        <label for="new-username">Username</label>
+                        <input type="text" id="new-username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-fullname">Full Name</label>
+                        <input type="text" id="new-fullname" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-password">Password</label>
+                        <input type="password" id="new-password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-role">Role</label>
+                        <select id="new-role" required>
+                            <option value="driver">Driver</option>
+                            <option value="dispatcher">Dispatcher</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary close-modal-btn">Cancel</button>
+                <button class="btn btn-primary" id="save-new-user-btn">Add User</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/db.js"></script>
+    <script src="js/forms.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

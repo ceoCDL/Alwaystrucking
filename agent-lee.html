@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Lee Integration Example | Always Trucking & Loading LLC</title>
+    
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+        
+        h1, h2, h3 {
+            color: #0056b3;
+        }
+        
+        h1 {
+            margin-top: 0;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border: 1px solid #e9ecef;
+        }
+        
+        code {
+            font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-size: 0.9em;
+        }
+        
+        .steps {
+            margin-top: 20px;
+        }
+        
+        .step {
+            margin-bottom: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #0056b3;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #003d82;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Agent Lee Integration Guide</h1>
+        
+        <p>Agent Lee is a virtual assistant designed to help users navigate the Always Trucking & Loading LLC training platform. Agent Lee provides contextual help, navigation assistance, and answers to frequently asked questions.</p>
+        
+        <div class="steps">
+            <div class="step">
+                <h2>Step 1: Include Required Scripts</h2>
+                <p>Add the following JavaScript files to your HTML pages:</p>
+                <pre><code>&lt;script src="js/agent-faq.js"&gt;&lt;/script&gt;
+&lt;script src="js/agent-lee.js"&gt;&lt;/script&gt;</code></pre>
+            </div>
+            
+            <div class="step">
+                <h2>Step 2: Agent Lee Features</h2>
+                <h3>Navigation</h3>
+                <p>Agent Lee can help users navigate between pages. The navigation buttons are automatically configured to link to the following pages:</p>
+                <ul>
+                    <li>Home (index.html)</li>
+                    <li>Courses (courses.html)</li>
+                    <li>Dashboard (dashboard.html)</li>
+                    <li>Login (login.html)</li>
+                    <li>Register (register.html)</li>
+                    <li>Quiz (quiz.html)</li>
+                </ul>
+                
+                <h3>Voice Interaction</h3>
+                <p>Agent Lee supports voice interaction using the Web Speech API:</p>
+                <ul>
+                    <li>Text-to-Speech: Agent Lee can read responses aloud</li>
+                    <li>Speech Recognition: Users can speak commands and questions</li>
+                </ul>
+                
+                <h3>Frequently Asked Questions</h3>
+                <p>Agent Lee can answer common questions about the training platform. The FAQ database is stored in agent-faq.js.</p>
+            </div>
+            
+            <div class="step">
+                <h2>Step 3: Customizing Agent Lee</h2>
+                <p>You can customize Agent Lee's appearance and behavior by modifying the following files:</p>
+                <ul>
+                    <li><strong>agent-lee.js</strong>: Main functionality and UI components</li>
+                    <li><strong>agent-faq.js</strong>: Frequently asked questions database</li>
+                </ul>
+                
+                <h3>Page-Specific Greetings</h3>
+                <p>Agent Lee provides contextual greetings based on the current page. You can modify these in the <code>addPageSpecificGreeting()</code> function in agent-lee.js.</p>
+            </div>
+            
+            <div class="step">
+                <h2>Step 4: Test Agent Lee</h2>
+                <p>Open any page with Agent Lee integrated to test the functionality:</p>
+                <ul>
+                    <li>Drag the Agent Lee card to reposition it</li>
+                    <li>Click navigation buttons to move between pages</li>
+                    <li>Type questions in the input field</li>
+                    <li>Click the Listen button to use voice commands</li>
+                    <li>Click the Help button for assistance</li>
+                </ul>
+                
+                <a href="index.html" class="btn">Test Agent Lee on Home Page</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Include Agent Lee -->
+    <script src="js/agent-faq.js"></script>
+    <script src="js/agent-lee.js"></script>
+</body>
+</html>
